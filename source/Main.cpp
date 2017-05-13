@@ -47,11 +47,11 @@ void simulateKeypress(Display* display, int key) {
   int revert;
   XGetInputFocus(display, &winFocus, &revert);
 
-  // Send a fake key press event to the window.
+  // Send a key press event to the window.
   XKeyEvent event = createKeyEvent(display, winFocus, winRoot, true,  key, 0);
   XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
   std::this_thread::sleep_for(std::chrono::milliseconds(2));
-  // Send a fake key release event to the window.
+  // Send a key release event to the window.
   event = createKeyEvent(display, winFocus, winRoot, false, key, 0);
   XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
   // For key codes check http://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
