@@ -15,9 +15,9 @@ using namespace std;
 struct StenoBoard {
 public:
   //14 buttons per side
-  bool s, t, p, h, k, w, r ,a ,o = false;
+  bool s = false, t = false, p = false, h = false, k = false, w = false, r = false, a = false, o = false;
   void resetButtons(){
-    s, t, p, h, k, w, r ,a ,o = false;
+    s = false, t = false, p = false, h = false, k = false, w = false, r = false, a = false, o = false;
   }
 };
 
@@ -73,6 +73,7 @@ int main(void)
   XEvent event;
   KeyCode modcode = 0;
   StenoBoard stenoboard;
+  stenoboard.resetButtons();
 
   if(!display) return 1;
 
@@ -119,6 +120,10 @@ int main(void)
           key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
                                 0, event.xkey.state & ShiftMask ? 1 : 0);
           if (stenoboard.k && stenoboard.w && stenoboard.r) {
+            cout << stenoboard.k << endl;
+            cout << stenoboard.w << endl;
+            cout << stenoboard.r << endl;
+            cout << false << endl;
             cout << "Exiting" << endl;
             exit(1);
           }
@@ -126,12 +131,10 @@ int main(void)
           if (stenoboard.t && stenoboard.o) {
             simulateKeypress(display, XK_t);
             simulateKeypress(display, XK_o);
-            stenoboard.resetButtons();
           }
-
+          stenoboard.resetButtons();
           break;
         default:
-
           break;
         }
     }
