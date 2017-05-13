@@ -60,7 +60,7 @@ void simulateKeypress(Display* display, int key) {
 
 int main(void)
 {
-  Display * display = XOpenDisplay(0x0);
+  Display* display = XOpenDisplay(0x0);
   XEvent event;
   KeyCode modcode = 0;
   StenoBoard stenoboard;
@@ -74,8 +74,7 @@ int main(void)
   KeySym key;
   bool allReleased = true;
   bool running = true;
-  while(running)
-    {
+  while(running) {
       XNextEvent(display, &event);
       switch(event.type)
         {
@@ -120,4 +119,5 @@ int main(void)
           break;
         }
     }
+  XFree(display);
 }
