@@ -5,14 +5,27 @@
 #include <X11/Xutil.h>
 #include <X11/Intrinsic.h>
 #include <X11/extensions/XTest.h>
+#include <X11/XKBlib.h>
 #include <stdlib.h>
 #include <chrono>
 #include <thread>
 
 using namespace std;
 
+struct StenoBoard {
+public:
+  //14 buttons per side
+  bool s = false;
+  bool t = false;
+  bool p = false;
+  bool h = false;
+  bool k = false;
+  bool w = false;
+  bool r = false;
+  bool a = false;
+  bool o = false;
+};
 
-#define KEYCODE XK_M
 
 // Function to create a keyboard event
 XKeyEvent createKeyEvent(Display *display, Window &win,
@@ -46,8 +59,9 @@ XKeyEvent createKeyEvent(Display *display, Window &win,
 int main(void)
 {
   Display * display = XOpenDisplay(0x0);
-  XEvent ev;
+  XEvent event;
   KeyCode modcode = 0;
+  StenoBoard stenoboard;
 
   if(!display) return 1;
 
@@ -58,62 +72,73 @@ int main(void)
 
   Window winFocus;
   int    revert;
-
+  KeySym key;
 
   while(presses < 10)
     {
-      Window winRoot = XDefaultRootWindow(display);
-      XGetInputFocus(display, &winFocus, &revert);
-      //XGrabKeyboard(dpy, DefaultRootWindow(dpy), false, 
-      //                   GrabModeAsync, GrabModeAsync,t);
-      // XNextEvent(display, &ev);
-      // modcode = XKeysymToKeycode(display, XStringToKeysym("a"));
-      // XTestFakeKeyEvent(display, modcode, False, 0);
-      // XFlush(display);
-      // XTestFakeKeyEvent(display, modcode, True, 0);
-      // XFlush(display);
-      // XTestFakeKeyEvent(display, modcode, False, 0);
-      // XFlush(display);
-std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-// Send a fake key press event to the window.
-   XKeyEvent event = createKeyEvent(display, winFocus, winRoot, true, KEYCODE, 0);
-   XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
 
-// Send a fake key release event to the window.
-   event = createKeyEvent(display, winFocus, winRoot, false, KEYCODE, 0);
-   XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+      // Window winRoot = XDefaultRootWindow(display);
+      // XGetInputFocus(display, &winFocus, &revert);
 
+      // std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+      // // Send a fake key press event to the window.
+      // XKeyEvent event = createKeyEvent(display, winFocus, winRoot, true,  XK_M, 0);
+      // XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
 
-      switch(ev.type)
+      // // Send a fake key release event to the window.
+      // event = createKeyEvent(display, winFocus, winRoot, false, XK_M, 0);
+      // XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+      // For key codes check http://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
+      XNextEvent(display, &event);
+      switch(event.type)
         {
         case KeyPress:
           cout << "Key pressed" << endl;
           presses++;
-          //          XSendEvent(display,InputFocus,False,KeyPressMask,&ev);
-          //modcode = XKeysymToKeycode(display, XStringToKeysym("a"));
-          //XTestFakeKeyEvent(display, modcode, False, 0);
-          // XFlush(display);
-          // XTestFakeKeyEvent(display, modcode, True, 0);
-          // XFlush(display);
-          // XTestFakeKeyEvent(display, modcode, False, 0);
-          // XFlush(display);
+          key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
+                                    0, event.xkey.state & ShiftMask ? 1 : 0);
+          if ((key == XK_x)) {
+            stenoboard.t = true;
+          }
+
+          if ((key == XK_p)) {
+            stenoboard.o = true;
+          }
+
+          if ((key == XK_i)) {
+            stenoboard.k = true;
+          }
+
+          if ((key == XK_a)) {
+            stenoboard.w = true;
+          }
+
+          if ((key == XK_e)) {
+            stenoboard.r = true;
+          }
+
           break;
         case KeyRelease:
-          XSendEvent(display,InputFocus,True,KeyReleaseMask,&ev);
-          break;
-        case ButtonPress:
-          XSendEvent(display,PointerWindow,True,ButtonPressMask,&ev);
-          break;
-        case ButtonRelease:
-          XSendEvent(display,PointerWindow,True,ButtonPressMask,&ev);
+          //          KeySym key_symbol = XKeycodeToKeysym(display, event.xkey.keycode, 0);
+          //          KeySym key_symbol = XKeycodeToKeysym(display, event.xkey.keycode, 0);
+          //          XSendEvent(display,InputFocus,True,KeyReleaseMask,&ev);
+          key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
+                                0, event.xkey.state & ShiftMask ? 1 : 0);
+          cout << "Key code" << endl;
+          if (stenoboard.k && stenoboard.w && stenoboard.r) {
+            cout << "Exiting" << endl;
+            exit(1);
+          }
+
+          if (stenoboard.t && stenoboard.o) {
+            cout << "Exiting" << endl;
+            exit(1);
+          }
+
           break;
         default:
 
           break;
         }
-
-      // XGrabKeyboard(dpy, DefaultRootWindow(dpy), false,                 
-      //                      GrabModeAsync, GrabModeAsync,t);
-
     }
 }
