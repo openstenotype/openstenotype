@@ -15,9 +15,10 @@ using namespace std;
 struct StenoBoard {
 public:
   //14 buttons per side
-  bool s = false, t = false, p = false, h = false, k = false, w = false, r = false, a = false, o = false;
+  bool s, t, p, h, k, w, r, a, o;
+
   void resetButtons(){
-    s = false, t = false, p = false, h = false, k = false, w = false, r = false, a = false, o = false;
+    s = t = p = h =  k = w = r = a = o = false;
   }
 };
 
@@ -82,7 +83,7 @@ int main(void)
                 GrabModeAsync, GrabModeAsync,t);
   int presses = 0;
   KeySym key;
-
+  bool allReleased = true;
   while(presses < 10)
     {
       XNextEvent(display, &event);
@@ -92,47 +93,38 @@ int main(void)
           presses++;
           key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
                                     0, event.xkey.state & ShiftMask ? 1 : 0);
-          if ((key == XK_x)) {
+          if (key == XK_x) {
             stenoboard.t = true;
           }
 
-          if ((key == XK_p)) {
+          if (key == XK_p) {
             stenoboard.o = true;
           }
 
-          if ((key == XK_i)) {
+          if (key == XK_i) {
             stenoboard.k = true;
           }
 
-          if ((key == XK_a)) {
+          if (key == XK_a) {
             stenoboard.w = true;
           }
 
-          if ((key == XK_e)) {
+          if (key == XK_e) {
             stenoboard.r = true;
           }
 
           break;
         case KeyRelease:
-          //          KeySym key_symbol = XKeycodeToKeysym(display, event.xkey.keycode, 0);
-          //          KeySym key_symbol = XKeycodeToKeysym(display, event.xkey.keycode, 0);
-          //          XSendEvent(display,InputFocus,True,KeyReleaseMask,&ev);
-          key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
-                                0, event.xkey.state & ShiftMask ? 1 : 0);
-          if (stenoboard.k && stenoboard.w && stenoboard.r) {
-            cout << stenoboard.k << endl;
-            cout << stenoboard.w << endl;
-            cout << stenoboard.r << endl;
-            cout << false << endl;
+          if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
             cout << "Exiting" << endl;
             exit(1);
           }
 
-          if (stenoboard.t && stenoboard.o) {
+          if (allReleased && stenoboard.t && stenoboard.o) {
             simulateKeypress(display, XK_t);
             simulateKeypress(display, XK_o);
+            stenoboard.resetButtons();
           }
-          stenoboard.resetButtons();
           break;
         default:
           break;
