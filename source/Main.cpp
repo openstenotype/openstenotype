@@ -9,19 +9,9 @@
 #include <stdlib.h>
 #include <chrono>
 #include <thread>
+#include <opensteno/StenoBoard.hpp>
 
-using namespace std;
-
-struct StenoBoard {
-public:
-  //14 buttons per side
-  bool s, t, p, h, k, w, r, a, o;
-
-  void resetButtons(){
-    s = t = p = h =  k = w = r = a = o = false;
-  }
-};
-
+using namespace opensteno;
 
 // Function to create a keyboard event
 XKeyEvent createKeyEvent(Display *display, Window &win,
@@ -116,7 +106,7 @@ int main(void)
           break;
         case KeyRelease:
           if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
-            cout << "Exiting" << endl;
+            std::cout << "Exiting" << std::endl;
             exit(1);
           }
 
