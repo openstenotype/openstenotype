@@ -71,16 +71,15 @@ int main(void)
   Time t = CurrentTime;
   XGrabKeyboard(display, DefaultRootWindow(display), false, 
                 GrabModeAsync, GrabModeAsync,t);
-  int presses = 0;
   KeySym key;
   bool allReleased = true;
-  while(presses < 10)
+  bool running = true;
+  while(running)
     {
       XNextEvent(display, &event);
       switch(event.type)
         {
         case KeyPress:
-          presses++;
           key = XkbKeycodeToKeysym( display, event.xkey.keycode, 
                                     0, event.xkey.state & ShiftMask ? 1 : 0);
           if (key == XK_x) {
@@ -107,7 +106,8 @@ int main(void)
         case KeyRelease:
           if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
             std::cout << "Exiting" << std::endl;
-            exit(1);
+            running = false;
+            stenoboard.resetButtons();
           }
 
           if (allReleased && stenoboard.t && stenoboard.o) {
