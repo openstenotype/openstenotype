@@ -10,6 +10,7 @@
 #include <chrono>
 #include <thread>
 #include <opensteno/StenoBoard.hpp>
+#include <opensteno/WindowSystem.hpp>
 
 using namespace opensteno;
 
