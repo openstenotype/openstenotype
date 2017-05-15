@@ -3,6 +3,7 @@
 namespace opensteno {
 class WindowSystem {
 public:
+  WindowSystem();
   void createKeyEvent();
 };
 } /* namespace opensteno */
