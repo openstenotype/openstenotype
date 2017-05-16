@@ -1,6 +1,6 @@
 # Opensteno Specification
 ## Modes
-- classic — A classic static steno machine
+- classic — A classic steno machine
 - spelling — A very simple dictionary containing the alphabet, common trigrams, common words and common characters
 - awesome — A mode specifically for controlling awesome wm
 ## Multiple Modes
