@@ -63,15 +63,13 @@ int main(void)
 {
   Display* display = XOpenDisplay(0x0);
   XEvent event;
-  KeyCode modcode = 0;
   StenoBoard stenoboard;
   stenoboard.resetButtons();
 
   if(!display) return 1;
 
-  Time t = CurrentTime;
   XGrabKeyboard(display, DefaultRootWindow(display), false, 
-                GrabModeAsync, GrabModeAsync,t);
+                GrabModeAsync, GrabModeAsync, CurrentTime);
   KeySym key;
   bool allReleased = true;
   bool running = true;
