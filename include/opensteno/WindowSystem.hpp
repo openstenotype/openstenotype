@@ -18,10 +18,11 @@ class WindowSystem {
 public:
   WindowSystem();
   ~WindowSystem();
-  void createKeyEvent();
+  void simulateKeypress(int key);
 private:
   Display* display;
   void grabKeyboard();
+  XKeyEvent createKeyEvent(Window &win, bool press, int keycode, int modifiers);
 };
 } /* namespace opensteno */
 #endif //OPENSTENO_WINDOW_SYSTEM_HPP
