@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <chrono>
 #include <thread>
-#include <opensteno/StenoBoard.hpp>
+#include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
 
 using namespace opensteno;
@@ -63,7 +63,7 @@ int main(void)
 {
   Display* display = XOpenDisplay(0x0);
   XEvent event;
-  StenoBoard stenoboard;
+  Stenoboard stenoboard;
   stenoboard.resetButtons();
 
   if(!display) return 1;

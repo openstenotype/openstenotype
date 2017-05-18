@@ -1,7 +1,7 @@
 #ifndef OPENSTENO_STENOBOARD_HPP
 #define OPENSTENO_STENOBOARD_HPP
 namespace opensteno {
-struct StenoBoard {
+struct Stenoboard {
 public:
   //14 buttons per side
   bool s, t, p, h, k, w, r, a, o;
