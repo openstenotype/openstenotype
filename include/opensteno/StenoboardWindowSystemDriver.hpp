@@ -5,9 +5,12 @@
 
 namespace opensteno {
   class StenoboardWindowSystemDriver {
+  private:
+    Stenoboard stenoboard;
+    WindowSystem& windowSystem;
   public:
     StenoboardWindowSystemDriver(WindowSystem& windowSystem);
-    StenoBoard getStenoboard();
+    Stenoboard getStenoboard();
   };
 } /* namespace opensteno */
 #endif //OPENSTENO_STENOBOARD_WINDOW_SYSTEM_DRIVER_HPP
