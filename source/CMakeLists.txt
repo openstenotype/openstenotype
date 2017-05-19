@@ -8,6 +8,7 @@ add_executable(${EXE_NAME}
   Main.cpp
   WindowSystem.cpp
   WindowSystemDriver.cpp
+  Opensteno.cpp
 )
 
 target_link_libraries(${EXE_NAME} ${OPENSTENO_LIBRARIES})

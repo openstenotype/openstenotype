@@ -2,13 +2,13 @@
 
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem) {
+
   }
 
   void WindowSystemDriver::update() {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
     bool allReleased = true;
-    bool running = true;
 
       switch(event.type)
         {
@@ -39,7 +39,7 @@ namespace opensteno {
         case KeyRelease:
           if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
             std::cout << "Exiting" << std::endl;
-            running = false;
+            opensteno.running = false;
             stenoboard.resetButtons();
           }
 

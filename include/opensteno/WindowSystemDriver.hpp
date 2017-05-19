@@ -1,5 +1,6 @@
 #ifndef OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
 #define OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
+#include <opensteno/Opensteno.hpp>
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
 
@@ -9,6 +10,7 @@ namespace opensteno {
     Stenoboard stenoboard;
     WindowSystem& windowSystem;
   public:
+    Opensteno opensteno;
     WindowSystemDriver(WindowSystem& windowSystem);
     void update();
     Stenoboard getStenoboard();
