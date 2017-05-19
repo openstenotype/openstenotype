@@ -19,6 +19,8 @@ public:
   WindowSystem();
   ~WindowSystem();
   void simulateKeypress(int key);
+  XEvent getNextEvent();
+  KeySym getKeySymFromEvent(XEvent event);
 private:
   Display* display;
   void grabKeyboard();

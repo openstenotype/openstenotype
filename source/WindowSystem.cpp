@@ -20,6 +20,20 @@ namespace opensteno {
                   GrabModeAsync, GrabModeAsync, CurrentTime);
   }
 
+  XEvent WindowSystem::getNextEvent() {
+    XEvent event;
+    XNextEvent(display, &event);
+
+    return event;
+  }
+
+  KeySym WindowSystem::getKeySymFromEvent(XEvent event) {
+    KeySym key;
+    key = XkbKeycodeToKeysym(display, event.xkey.keycode,
+                              0, event.xkey.state & ShiftMask ? 1 : 0);
+    return key;
+  }
+
   void WindowSystem::simulateKeypress(int key) {
     Window winFocus;
     int revert;

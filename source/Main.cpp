@@ -74,7 +74,7 @@ int main(void)
   bool allReleased = true;
   bool running = true;
   while(running) {
-      XNextEvent(display, &event);
+    XNextEvent(display, &event);
       switch(event.type)
         {
         case KeyPress:
