@@ -9,8 +9,9 @@ namespace opensteno {
   private:
     Stenoboard stenoboard;
     WindowSystem& windowSystem;
+    bool shutdown;
   public:
-    Opensteno opensteno;
+    bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);
     void update();
     Stenoboard getStenoboard();

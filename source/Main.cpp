@@ -1,3 +1,4 @@
+#include <opensteno/Opensteno.hpp>
 #include <opensteno/WindowSystem.hpp>
 #include <opensteno/WindowSystemDriver.hpp>
 
@@ -7,7 +8,7 @@ int main(void)
 {
   WindowSystem windowSystem;
   WindowSystemDriver windowSystemDriver(windowSystem);
-  while(windowSystemDriver.opensteno.running) {
+  while(!windowSystemDriver.receivedShutdownCommand()) {
     windowSystemDriver.update();
   }
 }

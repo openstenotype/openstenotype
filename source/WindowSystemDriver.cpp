@@ -1,8 +1,12 @@
 #include <opensteno/WindowSystemDriver.hpp>
 
 namespace opensteno {
-  WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem) {
+  WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
+    stenoboard.resetButtons();
+  }
 
+  bool WindowSystemDriver::receivedShutdownCommand() {
+    return shutdown;
   }
 
   void WindowSystemDriver::update() {
@@ -39,7 +43,7 @@ namespace opensteno {
         case KeyRelease:
           if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
             std::cout << "Exiting" << std::endl;
-            opensteno.running = false;
+            shutdown = true;
             stenoboard.resetButtons();
           }
 
