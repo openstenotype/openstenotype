@@ -1,6 +1,5 @@
 #ifndef OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
 #define OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
-#include <opensteno/Opensteno.hpp>
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
 
