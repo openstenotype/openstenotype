@@ -1,6 +1,5 @@
 #ifndef OPENSTENO_STENOBOARD_HPP
 #define OPENSTENO_STENOBOARD_HPP
-#include <vector>
 namespace opensteno {
 struct StenoboardLeft {
   bool numberBar1;
