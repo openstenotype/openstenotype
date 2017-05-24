@@ -10,7 +10,6 @@ struct StenoboardLeft {
 };
 
 struct StenoboardRight {
-  //right unit
   bool numberBar2;
   bool asterisk3, f, p, l, t, d;
   bool asterisk4, r, b, g, s, z;
