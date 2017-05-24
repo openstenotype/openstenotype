@@ -20,34 +20,34 @@ namespace opensteno {
           key = windowSystem.getKeySymFromEvent(event);
 
           if (key == XK_x) {
-            stenoboard.t = true;
+            stenoboard.left.t = true;
           }
 
           if (key == XK_p) {
-            stenoboard.o = true;
+            stenoboard.left.o = true;
           }
 
           if (key == XK_i) {
-            stenoboard.k = true;
+            stenoboard.left.k = true;
           }
 
           if (key == XK_a) {
-            stenoboard.w = true;
+            stenoboard.left.w = true;
           }
 
           if (key == XK_e) {
-            stenoboard.r = true;
+            stenoboard.left.r = true;
           }
 
           break;
         case KeyRelease:
-          if (allReleased && stenoboard.k && stenoboard.w && stenoboard.r) {
+          if (allReleased && stenoboard.left.k && stenoboard.left.w && stenoboard.left.r) {
             std::cout << "Exiting" << std::endl;
             shutdown = true;
             stenoboard.resetButtons();
           }
 
-          if (allReleased && stenoboard.t && stenoboard.o) {
+          if (allReleased && stenoboard.left.t && stenoboard.left.o) {
             windowSystem.simulateKeypress(XK_t);
             windowSystem.simulateKeypress(XK_o);
             stenoboard.resetButtons();
