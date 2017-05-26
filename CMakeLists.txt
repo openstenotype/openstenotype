@@ -19,6 +19,13 @@ find_package(X11 REQUIRED)
 include_directories(${X11_INCLUDE_DIR})
 list(APPEND OPENSTENO_LIBRARIES ${X11_LIBRARIES})
 
+find_package(Qt5Widgets REQUIRED)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+list(APPEND OPENSTENO_LIBRARIES ${Qt5Widgets_LIBRARIES})
+
+find_package (Threads)
+list(APPEND OPENSTENO_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
