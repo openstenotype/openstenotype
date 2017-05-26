@@ -1,9 +1,11 @@
 #include <QApplication>
 #include <QLabel>
 #include <QMessageBox>
+#include <QString>
 #include <QStatusBar>
 #include <QDockWidget>
 #include <QDesktopWidget>
+#include <QGridLayout>
 #include <opensteno/Opensteno.hpp>
 #include <thread>
 
@@ -15,10 +17,12 @@ void runUi(int argc, char **argv)
   QDesktopWidget widget;
   QRect mainScreenSize =
     widget.availableGeometry(widget.primaryScreen());
-  QLabel *label = new QLabel("Opensteno");
+  QLabel* label = new QLabel("Opensteno");
   label->setGeometry( mainScreenSize.width()-1000, mainScreenSize.height() - 32,500,500 );
   label->setFixedSize( 1000, 32 );
   label->show();
+  QString* style = new QString("QLabel {margin-left: 10}");
+  app.setStyleSheet(*style);
   app.exec();
 }
 
