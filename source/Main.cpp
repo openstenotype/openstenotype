@@ -20,6 +20,7 @@ void runUi(int argc, char **argv)
   QLabel* label = new QLabel("Opensteno");
   label->setGeometry( mainScreenSize.width()-1000, mainScreenSize.height() - 32,500,500 );
   label->setFixedSize( 1000, 32 );
+  label->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
   label->show();
   QString* style = new QString("QLabel {margin-left: 10}");
   app.setStyleSheet(*style);
