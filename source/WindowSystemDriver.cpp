@@ -19,6 +19,15 @@ namespace opensteno {
         case KeyPress:
           key = windowSystem.getKeySymFromEvent(event);
 
+          if (key == XK_c) {
+            stenoboard.left.h = true;
+          }
+
+          if (key == XK_e) {
+            stenoboard.left.r = true;
+          }
+
+
           if (key == XK_x) {
             stenoboard.left.t = true;
           }
