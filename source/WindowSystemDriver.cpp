@@ -10,6 +10,11 @@ namespace opensteno {
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.left.k));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.w));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+
+    dictionary.insert( std::pair<std::string, std::string >("TO", "to"));
+    dictionary.insert( std::pair<std::string, std::string >("T", "the"));
+    dictionary.insert( std::pair<std::string, std::string >("WUB", "one"));
+    dictionary.insert( std::pair<std::string, std::string >("WU", "with you"));
   }
 
   bool WindowSystemDriver::receivedShutdownCommand() {
@@ -21,6 +26,7 @@ namespace opensteno {
     KeySym key;
     bool allReleased = true;
     std::map<KeySym, std::shared_ptr<bool> >::iterator keyMapIterator;
+    std::map<std::string, std::string>::iterator dictionaryIterator;
 
       switch(event.type)
         {
@@ -41,10 +47,29 @@ namespace opensteno {
             stenoboard.resetButtons();
           }
 
-          if (allReleased && *stenoboard.left.t.get() && *stenoboard.left.o.get()) {
-            windowSystem.simulateKeypress(XK_t);
-            windowSystem.simulateKeypress(XK_o);
-            stenoboard.resetButtons();
+          dictionaryIterator = dictionary.find(stenoboard.getString());
+          if(dictionaryIterator != dictionary.end()) {
+
+            for(char& character : dictionaryIterator->second) {
+              //            for (std::string::reverse_iterator i = dictionaryIterator->second.rbegin();
+              //                 i != dictionaryIterator->second.rend(); ++i) {
+              if (character == 't') {
+                windowSystem.simulateKeypress(XK_t);
+              }
+
+              if (character == 'h') {
+                windowSystem.simulateKeypress(XK_h);
+              }
+
+              if (character == 'e') {
+                windowSystem.simulateKeypress(XK_e);
+              }
+
+              if (character == 'o') {
+                windowSystem.simulateKeypress(XK_o);
+              }
+              stenoboard.resetButtons();
+            }
           }
           break;
         default:

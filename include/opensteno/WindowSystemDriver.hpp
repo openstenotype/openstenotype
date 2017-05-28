@@ -12,6 +12,7 @@ namespace opensteno {
     WindowSystem& windowSystem;
     bool shutdown;
     std::map <KeySym, std::shared_ptr<bool> > keyMap;
+    std::map <std::string, std::string> dictionary;
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);
