@@ -2,6 +2,7 @@
 #define OPENSTENO_STENOBOARD_HPP
 
 #include <memory>
+#include <string>
 
 namespace opensteno {
 struct StenoboardLeft {
@@ -26,9 +27,22 @@ struct StenoboardLeft {
 };
 
 struct StenoboardRight {
-  bool numberBar;
-  bool asterisk1, f, p, l, t, d;
-  bool asterisk2, r, b, g, s, z;
+  std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
+
+  std::shared_ptr<bool> asterisk1 = std::make_shared<bool>(false);
+  std::shared_ptr<bool> f = std::make_shared<bool>(false);
+  std::shared_ptr<bool> p = std::make_shared<bool>(false);
+  std::shared_ptr<bool> l = std::make_shared<bool>(false);
+  std::shared_ptr<bool> t = std::make_shared<bool>(false);
+  std::shared_ptr<bool> d = std::make_shared<bool>(false);
+
+  std::shared_ptr<bool> asterisk2 = std::make_shared<bool>(false);
+  std::shared_ptr<bool> r = std::make_shared<bool>(false);
+  std::shared_ptr<bool> b = std::make_shared<bool>(false);
+  std::shared_ptr<bool> g = std::make_shared<bool>(false);
+  std::shared_ptr<bool> s = std::make_shared<bool>(false);
+  std::shared_ptr<bool> z = std::make_shared<bool>(false);
+
   std::shared_ptr<bool> e = std::make_shared<bool>(false);
   std::shared_ptr<bool> u = std::make_shared<bool>(false);
 };
@@ -62,9 +76,21 @@ public:
     *left.o.get() = false;
   }
   void resetRightButtons(){
-    right.numberBar = false;
-    right.asterisk1 = right.f = right.p = right.l = right.t = right.d = false;
-    right.asterisk2 = right.r = right.b = right.g = right.s = right.z = false;
+    *right.numberBar.get() = false;
+    *right.asterisk1.get() = false;
+    *right.f.get() = false;
+    *right.p.get() = false;
+    *right.l.get() = false;
+    *right.t.get() = false;
+    *right.d.get() = false;
+
+    *right.asterisk2.get() = false;
+    *right.r.get() = false;
+    *right.b.get() = false;
+    *right.g.get() = false;
+    *right.s.get() = false;
+    *right.z.get() = false;
+
     *right.e.get() = false;
     *right.u.get() = false;
   }
