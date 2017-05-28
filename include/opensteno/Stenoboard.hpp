@@ -1,5 +1,8 @@
 #ifndef OPENSTENO_STENOBOARD_HPP
 #define OPENSTENO_STENOBOARD_HPP
+
+#include <memory>
+
 namespace opensteno {
 struct StenoboardLeft {
   bool numberBar;
@@ -12,7 +15,8 @@ struct StenoboardRight {
   bool numberBar;
   bool asterisk1, f, p, l, t, d;
   bool asterisk2, r, b, g, s, z;
-  bool e, u;
+  std::unique_ptr<bool> e = std::make_unique<bool>(false);
+  std::unique_ptr<bool> u = std::make_unique<bool>(false);
 };
 
 struct Stenoboard {
@@ -34,7 +38,8 @@ public:
     right.numberBar = false;
     right.asterisk1 = right.f = right.p = right.l = right.t = right.d = false;
     right.asterisk2 = right.r = right.b = right.g = right.s = right.z = false;
-    right.e = right.u = false;
+    *right.e.get() = false;
+    *right.u.get() = false;
   }
 };
 } /* namespace opensteno */

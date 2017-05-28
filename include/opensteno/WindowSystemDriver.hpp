@@ -2,6 +2,7 @@
 #define OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
+#include <map>
 
 namespace opensteno {
   class WindowSystemDriver {
