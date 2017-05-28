@@ -5,18 +5,32 @@
 
 namespace opensteno {
 struct StenoboardLeft {
-  bool numberBar;
-  bool fn1, s1, t, p, h, asterisk1;
-  bool fn2, s2, k, w, r, asterisk2;
-  bool a, o;
+  std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
+
+  std::shared_ptr<bool> fn1 = std::make_shared<bool>(false);
+  std::shared_ptr<bool> s1  = std::make_shared<bool>(false);
+  std::shared_ptr<bool> t   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> p   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> h   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> asterisk1 = std::make_shared<bool>(false);
+
+  std::shared_ptr<bool> fn2 = std::make_shared<bool>(false);
+  std::shared_ptr<bool> s2  = std::make_shared<bool>(false);
+  std::shared_ptr<bool> k   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> w   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> r   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> asterisk2 = std::make_shared<bool>(false);
+
+  std::shared_ptr<bool> a   = std::make_shared<bool>(false);
+  std::shared_ptr<bool> o   = std::make_shared<bool>(false);
 };
 
 struct StenoboardRight {
   bool numberBar;
   bool asterisk1, f, p, l, t, d;
   bool asterisk2, r, b, g, s, z;
-  std::unique_ptr<bool> e = std::make_unique<bool>(false);
-  std::unique_ptr<bool> u = std::make_unique<bool>(false);
+  std::shared_ptr<bool> e = std::make_shared<bool>(false);
+  std::shared_ptr<bool> u = std::make_shared<bool>(false);
 };
 
 struct Stenoboard {
@@ -29,10 +43,23 @@ public:
     resetRightButtons();
   }
   void resetLeftButtons(){
-    left.numberBar = false;
-    left.fn1 = left.s1 = left.t = left.p = left.h = left.asterisk1 = false;
-    left.fn2 = left.s2 = left.k = left.w = left.r = left.asterisk2 = false;
-    left.a = left.o = false;
+    *left.numberBar.get() = false;
+    *left.fn1.get() = false;
+    *left.s1.get() = false;
+    *left.t.get() = false;
+    *left.p.get() = false;
+    *left.h.get() = false;
+    *left.asterisk1.get() = false;
+
+    *left.fn2.get() = false;
+    *left.s2.get() = false;
+    *left.k.get() = false;
+    *left.w.get() = false;
+    *left.r.get() = false;
+    *left.asterisk2.get() = false;
+
+    *left.a.get() = false;
+    *left.o.get() = false;
   }
   void resetRightButtons(){
     right.numberBar = false;

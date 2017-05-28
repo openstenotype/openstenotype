@@ -11,7 +11,7 @@ namespace opensteno {
     Stenoboard stenoboard;
     WindowSystem& windowSystem;
     bool shutdown;
-    std::map <KeySym, std::unique_ptr<bool> > keyMap;
+    std::map <KeySym, std::shared_ptr<bool> > keyMap;
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);

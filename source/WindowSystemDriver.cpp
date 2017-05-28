@@ -3,6 +3,13 @@
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
     stenoboard.resetButtons();
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_c, stenoboard.left.h));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_x, stenoboard.left.t));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_p, stenoboard.left.o));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.left.k));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.w));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
   }
 
   bool WindowSystemDriver::receivedShutdownCommand() {
@@ -13,50 +20,28 @@ namespace opensteno {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
     bool allReleased = true;
+    std::map<KeySym, std::shared_ptr<bool> >::iterator keyMapIterator;
 
       switch(event.type)
         {
         case KeyPress:
           key = windowSystem.getKeySymFromEvent(event);
 
-          if (key == XK_c) {
-            stenoboard.left.h = true;
-          }
-
-          if (key == XK_e) {
-            stenoboard.left.r = true;
-          }
-
-
-          if (key == XK_x) {
-            stenoboard.left.t = true;
-          }
-
-          if (key == XK_p) {
-            stenoboard.left.o = true;
-          }
-
-          if (key == XK_i) {
-            stenoboard.left.k = true;
-          }
-
-          if (key == XK_a) {
-            stenoboard.left.w = true;
-          }
-
-          if (key == XK_e) {
-            stenoboard.left.r = true;
+          keyMapIterator = keyMap.find(key);
+          if(keyMapIterator != keyMap.end()) {
+            *keyMapIterator->second.get() = true;
           }
 
           break;
         case KeyRelease:
-          if (allReleased && stenoboard.left.k && stenoboard.left.w && stenoboard.left.r) {
+          if (allReleased && *stenoboard.left.k.get() &&
+              *stenoboard.left.w.get() && *stenoboard.left.r.get()) {
             std::cout << "Exiting" << std::endl;
             shutdown = true;
             stenoboard.resetButtons();
           }
 
-          if (allReleased && stenoboard.left.t && stenoboard.left.o) {
+          if (allReleased && *stenoboard.left.t.get() && *stenoboard.left.o.get()) {
             windowSystem.simulateKeypress(XK_t);
             windowSystem.simulateKeypress(XK_o);
             stenoboard.resetButtons();
