@@ -3,6 +3,7 @@
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
 #include <map>
+#include <memory>
 
 namespace opensteno {
   class WindowSystemDriver {
@@ -10,6 +11,7 @@ namespace opensteno {
     Stenoboard stenoboard;
     WindowSystem& windowSystem;
     bool shutdown;
+    std::map <KeySym, std::unique_ptr<bool> > keyMap;
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);
