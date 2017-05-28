@@ -94,6 +94,103 @@ public:
     *right.e.get() = false;
     *right.u.get() = false;
   }
+
+  /*
+   * Returns string in steno order
+   */
+  std::string getString(){
+    std::string string = "";
+    if (*left.s1.get() || *left.s2.get()) {
+      string.append("S");
+    }
+
+    if (*left.t.get()) {
+      string.append("T");
+    }
+
+    if (*left.k.get()) {
+      string.append("K");
+    }
+
+    if (*left.p.get()) {
+      string.append("P");
+    }
+
+    if (*left.w.get()) {
+      string.append("W");
+    }
+
+    if (*left.h.get()) {
+      string.append("H");
+    }
+
+    if (*left.r.get()) {
+      string.append("R");
+    }
+
+    if (*left.a.get()) {
+      string.append("A");
+    }
+
+    if (*left.o.get()) {
+      string.append("O");
+    }
+
+    if (*left.asterisk1.get() || *left.asterisk2.get() ||
+        *right.asterisk1.get() || *right.asterisk2.get() ) {
+      string.append("*");
+    }
+
+    if (*right.e.get()) {
+      string.append("E");
+    }
+
+    if (*right.u.get()) {
+      string.append("U");
+    }
+
+    if (*right.f.get()) {
+      string.append("F");
+    }
+
+    if (*right.r.get()) {
+      string.append("R");
+    }
+
+    if (*right.p.get()) {
+      string.append("P");
+    }
+
+    if (*right.b.get()) {
+      string.append("B");
+    }
+
+    if (*right.l.get()) {
+      string.append("L");
+    }
+
+    if (*right.g.get()) {
+      string.append("G");
+    }
+
+    if (*right.t.get()) {
+      string.append("T");
+    }
+
+    if (*right.s.get()) {
+      string.append("S");
+    }
+
+    if (*right.d.get()) {
+      string.append("D");
+    }
+
+    if (*right.z.get()) {
+      string.append("Z");
+    }
+
+    return string;
+  }
 };
 } /* namespace opensteno */
 #endif //OPENSTENO_STENOBOARD_HPP
