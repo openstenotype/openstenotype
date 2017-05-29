@@ -51,8 +51,7 @@ namespace opensteno {
           if(dictionaryIterator != dictionary.end()) {
 
             for(char& character : dictionaryIterator->second) {
-              //            for (std::string::reverse_iterator i = dictionaryIterator->second.rbegin();
-              //                 i != dictionaryIterator->second.rend(); ++i) {
+
               if (character == 't') {
                 windowSystem.simulateKeypress(XK_t);
               }
