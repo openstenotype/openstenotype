@@ -52,6 +52,10 @@ public:
   //15 buttons per side
   StenoboardLeft  left;
   StenoboardRight right;
+  Stenoboard() {
+    resetButtons();
+  }
+
   void resetButtons(){
     resetLeftButtons();
     resetRightButtons();
