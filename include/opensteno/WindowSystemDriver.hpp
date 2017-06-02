@@ -2,6 +2,7 @@
 #define OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
+#include <opensteno/KeyMapFactory.hpp>
 #include <map>
 #include <memory>
 
@@ -9,6 +10,7 @@ namespace opensteno {
   class WindowSystemDriver {
   private:
     Stenoboard stenoboard;
+    KeyMapFactory keyMapFactory;
     WindowSystem& windowSystem;
     bool shutdown;
     std::map <KeySym, std::shared_ptr<bool> > keyMap;

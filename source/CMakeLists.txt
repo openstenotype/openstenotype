@@ -9,6 +9,7 @@ add_executable(${EXE_NAME}
   WindowSystem.cpp
   WindowSystemDriver.cpp
   Opensteno.cpp
+  KeyMapFactory.cpp
 )
 
 target_link_libraries(${EXE_NAME} ${OPENSTENO_LIBRARIES})
