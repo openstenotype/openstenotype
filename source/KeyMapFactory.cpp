@@ -4,6 +4,32 @@ namespace opensteno {
   KeyMapFactory::KeyMapFactory() {
   }
 
+  std::map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getNeoKeyMap(Stenoboard stenoboard) {
+    std::map <KeySym, std::shared_ptr<bool> > keyMap;
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_c, stenoboard.left.h));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_x, stenoboard.left.t));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_p, stenoboard.left.o));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.left.k));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.w));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+
+    return keyMap;
+  }
+
+  std::map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getQwertzKeyMap(Stenoboard stenoboard) {
+    std::map <KeySym, std::shared_ptr<bool> > keyMap;
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_c, stenoboard.left.h));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_x, stenoboard.left.t));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_p, stenoboard.left.o));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.left.k));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.w));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+
+    return keyMap;
+  }
+
   std::map <std::string, KeySym> KeyMapFactory::getSymMap() {
     std::map <std::string, KeySym> keySymMap;
     keySymMap.insert( std::pair<std::string, KeySym>("a", XK_a));
