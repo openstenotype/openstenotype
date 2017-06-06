@@ -41,13 +41,35 @@ namespace opensteno {
 
   std::map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getQwertzKeyMap(Stenoboard stenoboard) {
     std::map <KeySym, std::shared_ptr<bool> > keyMap;
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_c, stenoboard.left.h));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_x, stenoboard.left.t));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_p, stenoboard.left.o));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.left.k));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.w));
-    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.r));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_3, stenoboard.numberBar));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_t, stenoboard.asterisk1));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_g, stenoboard.asterisk2));
+
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_q, stenoboard.left.s1));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_w, stenoboard.left.t));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_e, stenoboard.left.p));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_r, stenoboard.left.h));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_a, stenoboard.left.s2));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_s, stenoboard.left.k));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_d, stenoboard.left.w));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_f, stenoboard.left.r));
+
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_c, stenoboard.left.a));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_v, stenoboard.left.o));
+
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_u, stenoboard.right.f));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_i, stenoboard.right.p));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_o, stenoboard.right.l));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_p, stenoboard.right.t));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_bracketleft, stenoboard.right.d));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_j, stenoboard.right.r));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_k, stenoboard.right.g));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_l, stenoboard.right.b));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_semicolon, stenoboard.right.s));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_comma, stenoboard.right.z));
+
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_n, stenoboard.right.e));
+    keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_m, stenoboard.right.u));
 
     return keyMap;
   }
