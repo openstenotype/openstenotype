@@ -53,6 +53,8 @@ public:
   StenoboardLeft  left;
   StenoboardRight right;
   std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
+  std::shared_ptr<bool> asterisk1 = std::make_shared<bool>(false);
+  std::shared_ptr<bool> asterisk2 = std::make_shared<bool>(false);
 
   Stenoboard() {
     resetButtons();
