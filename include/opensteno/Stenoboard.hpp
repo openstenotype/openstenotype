@@ -52,16 +52,18 @@ public:
   //15 buttons per side
   StenoboardLeft  left;
   StenoboardRight right;
+  std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
+
   Stenoboard() {
     resetButtons();
   }
 
   void resetButtons(){
+    *numberBar.get() = false;
     resetLeftButtons();
     resetRightButtons();
   }
   void resetLeftButtons(){
-    *left.numberBar.get() = false;
     *left.fn1.get() = false;
     *left.s1.get() = false;
     *left.t.get() = false;
@@ -80,7 +82,6 @@ public:
     *left.o.get() = false;
   }
   void resetRightButtons(){
-    *right.numberBar.get() = false;
     *right.asterisk1.get() = false;
     *right.f.get() = false;
     *right.p.get() = false;

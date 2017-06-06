@@ -7,6 +7,7 @@ namespace opensteno {
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
 
     dictionary.insert( std::pair<std::string, std::string >("TO", "to"));
+    dictionary.insert( std::pair<std::string, std::string >("TA", "that"));
     dictionary.insert( std::pair<std::string, std::string >("T", "the"));
     dictionary.insert( std::pair<std::string, std::string >("WUB", "one"));
     dictionary.insert( std::pair<std::string, std::string >("WU", "with you"));
