@@ -19,11 +19,18 @@ namespace opensteno {
     return shutdown;
   }
 
+  void WindowSystemDriver::registerKeyPress(KeySym key) {
+    std::map<KeySym, std::shared_ptr<bool> >::iterator keyMapIterator;
+    keyMapIterator = keyMap.find(key);
+    if(keyMapIterator != keyMap.end()) {
+      *keyMapIterator->second.get() = true;
+    }
+  }
+
   void WindowSystemDriver::update() {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
     bool allReleased = true;
-    std::map<KeySym, std::shared_ptr<bool> >::iterator keyMapIterator;
     std::map<std::string, std::string>::iterator dictionaryIterator;
     std::map<std::string, KeySym>::iterator keySymMapIterator;
 
@@ -31,11 +38,7 @@ namespace opensteno {
         {
         case KeyPress:
           key = windowSystem.getKeySymFromEvent(event);
-
-          keyMapIterator = keyMap.find(key);
-          if(keyMapIterator != keyMap.end()) {
-            *keyMapIterator->second.get() = true;
-          }
+          registerKeyPress(key);
 
           break;
         case KeyRelease:
