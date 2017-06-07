@@ -11,6 +11,7 @@ namespace opensteno {
     dictionary.insert( std::pair<std::string, std::string >("T", "the"));
     dictionary.insert( std::pair<std::string, std::string >("WUB", "one"));
     dictionary.insert( std::pair<std::string, std::string >("WU", "with you"));
+    dictionary.insert( std::pair<std::string, std::string >("KWR", "<exit>"));
 
     keySymMap = keyMapFactory.getSymMap();
   }
@@ -30,7 +31,6 @@ namespace opensteno {
   void WindowSystemDriver::update() {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
-    bool allReleased = true;
     std::map<std::string, std::string>::iterator dictionaryIterator;
     std::map<std::string, KeySym>::iterator keySymMapIterator;
 
@@ -42,26 +42,25 @@ namespace opensteno {
 
           break;
         case KeyRelease:
-          if (allReleased && *stenoboard.left.k.get() &&
-              *stenoboard.left.w.get() && *stenoboard.left.r.get()) {
-            std::cout << "Exiting" << std::endl;
-            shutdown = true;
-            stenoboard.resetButtons();
-          }
-
           dictionaryIterator = dictionary.find(stenoboard.getString());
-          if(dictionaryIterator != dictionary.end()) {
-            for(char character : dictionaryIterator->second) {
-              std::stringstream stringStream;
-              stringStream << character;
-              std::string characterString;
-              stringStream >> characterString;
-              keySymMapIterator = keySymMap.find(characterString);
-
-              if(keySymMap.find(characterString) != keySymMap.end()) {
-                windowSystem.simulateKeypress(keySymMapIterator->second);
-              }
+          if (dictionaryIterator != dictionary.end()) {
+            if (dictionaryIterator->second == "<exit>") {
+              std::cout << "Exiting" << std::endl;
+              shutdown = true;
               stenoboard.resetButtons();
+            } else {
+              for(char character : dictionaryIterator->second) {
+                std::stringstream stringStream;
+                stringStream << character;
+                std::string characterString;
+                stringStream >> characterString;
+                keySymMapIterator = keySymMap.find(characterString);
+
+                if(keySymMap.find(characterString) != keySymMap.end()) {
+                  windowSystem.simulateKeypress(keySymMapIterator->second);
+                }
+                stenoboard.resetButtons();
+              }
             }
           }
           break;
