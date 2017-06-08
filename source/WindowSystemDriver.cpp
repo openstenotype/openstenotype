@@ -20,6 +20,15 @@ namespace opensteno {
     return shutdown;
   }
 
+  std::string WindowSystemDriver::charToString(char character) {
+    std::stringstream stringStream;
+    stringStream << character;
+    std::string characterString;
+    stringStream >> characterString;
+
+    return characterString;
+  }
+
   void WindowSystemDriver::registerKeyPress(KeySym key) {
     std::map<KeySym, std::shared_ptr<bool> >::iterator keyMapIterator;
     keyMapIterator = keyMap.find(key);
@@ -50,10 +59,7 @@ namespace opensteno {
               stenoboard.resetButtons();
             } else {
               for(char character : dictionaryIterator->second) {
-                std::stringstream stringStream;
-                stringStream << character;
-                std::string characterString;
-                stringStream >> characterString;
+                std::string characterString = charToString(character);
                 keySymMapIterator = keySymMap.find(characterString);
 
                 if(keySymMap.find(characterString) != keySymMap.end()) {

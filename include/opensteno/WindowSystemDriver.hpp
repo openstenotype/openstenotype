@@ -17,6 +17,7 @@ namespace opensteno {
     std::map <std::string, std::string> dictionary;
     std::map <std::string, KeySym> keySymMap;
     void registerKeyPress(KeySym key);
+    std::string charToString(char character);
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);
