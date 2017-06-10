@@ -4,3 +4,5 @@ A free and open steno software for linux.
 
 Compile with
 cmake ./; make; make run;
+
+To exit opensteno you have to stroke KWR.
