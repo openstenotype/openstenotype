@@ -1,6 +1,13 @@
 # Opensteno Specification
+## Features
+- Plover compatible dictionaries
+- Json config file
+- Create user notifications by user defined command (e.g. espeak to speak status information to the user)
+    - Currently active mode
 ## Modes
-- classic — A classic steno machine
+### Classic 
+A classic steno machine with a big dictionary based on stened or plover.
+### Other
 - spelling — A very simple dictionary containing the alphabet, common trigrams, common words and common characters
 - awesome — A mode specifically for controlling awesome wm
 - emacs — A mode to controll emacs
