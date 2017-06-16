@@ -37,11 +37,32 @@ namespace opensteno {
     }
   }
 
+  void WindowSystemDriver::processStroke() {
+    std::map<std::string, std::string>::iterator dictionaryIterator;
+    std::map<std::string, KeySym>::iterator keySymMapIterator;
+    dictionaryIterator = dictionary.find(stenoboard.getString());
+    if (dictionaryIterator != dictionary.end()) {
+      if (dictionaryIterator->second == "<exit>") {
+        std::cout << "Exiting" << std::endl;
+        shutdown = true;
+        stenoboard.resetButtons();
+      } else {
+        for(char character : dictionaryIterator->second) {
+          std::string characterString = charToString(character);
+          keySymMapIterator = keySymMap.find(characterString);
+
+          if(keySymMap.find(characterString) != keySymMap.end()) {
+            windowSystem.simulateKeypress(keySymMapIterator->second);
+          }
+          stenoboard.resetButtons();
+        }
+      }
+    }
+  }
+
   void WindowSystemDriver::update() {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
-    std::map<std::string, std::string>::iterator dictionaryIterator;
-    std::map<std::string, KeySym>::iterator keySymMapIterator;
 
       switch(event.type)
         {
@@ -51,24 +72,7 @@ namespace opensteno {
 
           break;
         case KeyRelease:
-          dictionaryIterator = dictionary.find(stenoboard.getString());
-          if (dictionaryIterator != dictionary.end()) {
-            if (dictionaryIterator->second == "<exit>") {
-              std::cout << "Exiting" << std::endl;
-              shutdown = true;
-              stenoboard.resetButtons();
-            } else {
-              for(char character : dictionaryIterator->second) {
-                std::string characterString = charToString(character);
-                keySymMapIterator = keySymMap.find(characterString);
-
-                if(keySymMap.find(characterString) != keySymMap.end()) {
-                  windowSystem.simulateKeypress(keySymMapIterator->second);
-                }
-                stenoboard.resetButtons();
-              }
-            }
-          }
+          processStroke();
           break;
         default:
           break;
