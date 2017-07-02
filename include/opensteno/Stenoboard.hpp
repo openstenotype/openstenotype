@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <iostream>
 
 namespace opensteno {
 struct StenoboardLeft {
@@ -73,50 +74,50 @@ public:
 
   bool leftButtonsReleased(){
     bool topRow =
-    *left.fn1.get() &&
-    *left.s1.get() &&
-    *left.t.get() &&
-    *left.p.get() &&
-    *left.h.get() &&
+    *left.fn1.get() ||
+    *left.s1.get() ||
+    *left.t.get() ||
+    *left.p.get() ||
+    *left.h.get() ||
     *left.asterisk1.get();
 
     bool bottomRow =
-    *left.fn2.get() &&
-    *left.s2.get() &&
-    *left.k.get() &&
-    *left.w.get() &&
-    *left.r.get() &&
+    *left.fn2.get() ||
+    *left.s2.get() ||
+    *left.k.get() ||
+    *left.w.get() ||
+    *left.r.get() ||
     *left.asterisk2.get();
 
     bool thumbRow =
-    *left.a.get() &&
+    *left.a.get() ||
     *left.o.get();
 
-    return not(topRow && bottomRow && thumbRow);
+    return not(topRow || bottomRow || thumbRow);
   }
 
   bool rightButtonsReleased(){
     bool topRow =
-    *right.asterisk1.get() &&
-    *right.f.get() &&
-    *right.p.get() &&
-    *right.l.get() &&
-    *right.t.get() &&
+    *right.asterisk1.get() ||
+    *right.f.get() ||
+    *right.p.get() ||
+    *right.l.get() ||
+    *right.t.get() ||
     *right.d.get();
 
     bool bottomRow =
-    *right.asterisk2.get() &&
-    *right.r.get() &&
-    *right.b.get() &&
-    *right.g.get() &&
-    *right.s.get() &&
+    *right.asterisk2.get() ||
+    *right.r.get() ||
+    *right.b.get() ||
+    *right.g.get() ||
+    *right.s.get() ||
     *right.z.get();
 
     bool thumbRow =
-    *right.e.get() &&
+    *right.e.get() ||
     *right.u.get();
 
-    return not(topRow && bottomRow && thumbRow);
+    return not(topRow || bottomRow || thumbRow);
   }
 
   void resetLeftButtons(){

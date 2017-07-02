@@ -4,6 +4,7 @@
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
     stenoboard.resetButtons();
+    strokeStenoboard.resetButtons();
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
     strokeKeyMap = keyMapFactory.getNeoKeyMap(strokeStenoboard);
 
@@ -52,8 +53,8 @@ namespace opensteno {
   void WindowSystemDriver::processStroke() {
     std::map<std::string, std::string>::iterator dictionaryIterator;
     std::map<std::string, KeySym>::iterator keySymMapIterator;
-    dictionaryIterator = dictionary.find(stenoboard.getString());
-    std::cout << "--" << stenoboard.getString() << "--" << std::endl;
+    dictionaryIterator = dictionary.find(strokeStenoboard.getString());
+    std::cout << "Found stroke" << strokeStenoboard.getString() << "." << std::endl;
     if (dictionaryIterator != dictionary.end()) {
       if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
@@ -69,13 +70,11 @@ namespace opensteno {
         }
       }
     }
-    stenoboard.resetButtons();
   }
 
   void WindowSystemDriver::update() {
     XEvent event = windowSystem.getNextEvent();
     KeySym key;
-
       switch(event.type)
         {
         case KeyPress:
@@ -84,8 +83,13 @@ namespace opensteno {
 
           break;
         case KeyRelease:
+          key = windowSystem.getKeySymFromEvent(event);
           registerKeyRelease(key);
-          processStroke();
+          if (stenoboard.allButtonsReleased()) {
+            stenoboard.resetButtons();
+            processStroke();
+            strokeStenoboard.resetButtons();
+          }
           break;
         default:
           break;
