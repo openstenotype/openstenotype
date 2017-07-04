@@ -10,7 +10,7 @@ namespace opensteno {
   class WindowSystemDriver {
   private:
     Stenoboard stenoboard;
-    Stenoboard strokeStenoboard;
+    Stenoboard stroke;
     KeyMapFactory keyMapFactory;
     WindowSystem& windowSystem;
     bool shutdown;

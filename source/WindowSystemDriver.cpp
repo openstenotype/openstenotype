@@ -4,9 +4,9 @@
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
     stenoboard.resetButtons();
-    strokeStenoboard.resetButtons();
+    stroke.resetButtons();
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
-    strokeKeyMap = keyMapFactory.getNeoKeyMap(strokeStenoboard);
+    strokeKeyMap = keyMapFactory.getNeoKeyMap(stroke);
 
     dictionary.insert( std::pair<std::string, std::string >("TO", "to"));
     dictionary.insert( std::pair<std::string, std::string >("TA", "that"));
@@ -53,7 +53,7 @@ namespace opensteno {
   void WindowSystemDriver::processStroke() {
     std::map<std::string, std::string>::iterator dictionaryIterator;
     std::map<std::string, KeySym>::iterator keySymMapIterator;
-    dictionaryIterator = dictionary.find(strokeStenoboard.getString());
+    dictionaryIterator = dictionary.find(stroke.getString());
     if (dictionaryIterator != dictionary.end()) {
       if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
@@ -87,7 +87,7 @@ namespace opensteno {
           if (stenoboard.allButtonsReleased()) {
             stenoboard.resetButtons();
             processStroke();
-            strokeStenoboard.resetButtons();
+            stroke.resetButtons();
           }
           break;
         default:
