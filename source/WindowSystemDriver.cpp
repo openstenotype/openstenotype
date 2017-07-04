@@ -54,7 +54,6 @@ namespace opensteno {
     std::map<std::string, std::string>::iterator dictionaryIterator;
     std::map<std::string, KeySym>::iterator keySymMapIterator;
     dictionaryIterator = dictionary.find(strokeStenoboard.getString());
-    std::cout << "Found stroke" << strokeStenoboard.getString() << "." << std::endl;
     if (dictionaryIterator != dictionary.end()) {
       if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
