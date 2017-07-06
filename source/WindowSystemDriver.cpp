@@ -3,6 +3,7 @@
 
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
+    helper = WindowSystemDriverHelper();
     stenoboard.resetButtons();
     stroke.resetButtons();
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
@@ -22,32 +23,13 @@ namespace opensteno {
     return shutdown;
   }
 
-  std::string WindowSystemDriver::charToString(char character) {
-    std::stringstream stringStream;
-    stringStream << character;
-    std::string characterString;
-    stringStream >> characterString;
-
-    return characterString;
-  }
-
-  void WindowSystemDriver::registerKey(KeySym key,
-                                       std::map<KeySym, std::shared_ptr<bool> > map,
-                                       bool value) {
-    std::map<KeySym, std::shared_ptr<bool> >::iterator mapIterator;
-    mapIterator = map.find(key);
-    if(mapIterator != map.end()) {
-      *mapIterator->second.get() = value;
-    }
-  }
-
   void WindowSystemDriver::registerKeyPress(KeySym key) {
-    registerKey(key, keyMap, true);
-    registerKey(key, strokeKeyMap, true);
+    helper.registerKey(key, keyMap, true);
+    helper.registerKey(key, strokeKeyMap, true);
   }
 
   void WindowSystemDriver::registerKeyRelease(KeySym key) {
-    registerKey(key, keyMap, false);
+    helper.registerKey(key, keyMap, false);
   }
 
   void WindowSystemDriver::processStroke() {
@@ -60,7 +42,7 @@ namespace opensteno {
         shutdown = true;
       } else {
         for(char character : dictionaryIterator->second) {
-          std::string characterString = charToString(character);
+          std::string characterString = helper.charToString(character);
           keySymMapIterator = keySymMap.find(characterString);
 
           if(keySymMap.find(characterString) != keySymMap.end()) {

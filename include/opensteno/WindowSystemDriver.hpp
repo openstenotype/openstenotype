@@ -2,6 +2,7 @@
 #define OPENSTENO_WINDOW_SYSTEM_DRIVER_HPP
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
+#include <opensteno/WindowSystemDriverHelper.hpp>
 #include <opensteno/KeyMapFactory.hpp>
 #include <map>
 #include <memory>
@@ -13,18 +14,15 @@ namespace opensteno {
     Stenoboard stroke;
     KeyMapFactory keyMapFactory;
     WindowSystem& windowSystem;
+    WindowSystemDriverHelper helper;
     bool shutdown;
     std::map <KeySym, std::shared_ptr<bool> > keyMap;
     std::map <KeySym, std::shared_ptr<bool> > strokeKeyMap;
     std::map <std::string, std::string> dictionary;
     std::map <std::string, KeySym> keySymMap;
-    void registerKey(KeySym key,
-                     std::map<KeySym, std::shared_ptr<bool>> map,
-                     bool value);
     void registerKeyPress(KeySym key);
     void registerKeyRelease(KeySym key);
     void processStroke();
-    std::string charToString(char character);
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(WindowSystem& windowSystem);

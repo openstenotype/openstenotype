@@ -8,6 +8,7 @@ add_executable(${EXE_NAME}
   Main.cpp
   WindowSystem.cpp
   WindowSystemDriver.cpp
+  WindowSystemDriverHelper.cpp
   Opensteno.cpp
   KeyMapFactory.cpp
 )
