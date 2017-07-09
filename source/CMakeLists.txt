@@ -6,6 +6,7 @@ endif()
 
 add_executable(${EXE_NAME}
   Main.cpp
+  DictionaryLoader.cpp
   WindowSystem.cpp
   WindowSystemDriver.cpp
   WindowSystemDriverHelper.cpp
