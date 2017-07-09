@@ -6,3 +6,4 @@ source/CMakeFiles/
 source/Makefile
 source/cmake_install.cmake
 source/opensteno
+external/json11/libjson11.a
