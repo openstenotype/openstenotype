@@ -25,7 +25,7 @@ find_package(json11 REQUIRED)
 list(APPEND OPENSTENO_INCLUDE_DIRS ${JSON11_INCLUDE_DIR})
 list(APPEND OPENSTENO_LIBRARIES ${JSON11_LIBRARY})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${OPENSTENO_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
   add_definitions("-Wall")

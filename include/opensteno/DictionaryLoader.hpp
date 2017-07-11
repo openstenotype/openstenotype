@@ -1,13 +1,14 @@
 #ifndef OPENSTENO_DICTIONARY_LOADER_HPP
 #define OPENSTENO_DICTIONARY_LOADER_HPP
 
-#include <tinyxml2.h>
 #include <string>
+#include <map>
+#include <json11/json11.hpp>
 
 namespace opensteno {
   class DictionaryLoader {
   public:
-    void getDictionaryFromFile(std::string filename);
+    static std::map <std::string, std::string> getDictionaryFromFile(std::string filename);
   };
 } /* namespace opensteno */
 #endif //OPENSTENO_DICTIONARY_LOADER_HPP

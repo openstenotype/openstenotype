@@ -1,4 +1,5 @@
 #include <opensteno/WindowSystemDriver.hpp>
+#include <opensteno/DictionaryLoader.hpp>
 #include <sstream>
 
 namespace opensteno {
@@ -8,14 +9,7 @@ namespace opensteno {
     stroke.resetButtons();
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
     strokeKeyMap = keyMapFactory.getNeoKeyMap(stroke);
-
-    dictionary.insert( std::pair<std::string, std::string >("TO", "to"));
-    dictionary.insert( std::pair<std::string, std::string >("TA", "that"));
-    dictionary.insert( std::pair<std::string, std::string >("T", "the"));
-    dictionary.insert( std::pair<std::string, std::string >("WUB", "one"));
-    dictionary.insert( std::pair<std::string, std::string >("WU", "with you"));
-    dictionary.insert( std::pair<std::string, std::string >("KWR", "<exit>"));
-
+    dictionary = DictionaryLoader::getDictionaryFromFile("test.json");
     keySymMap = keyMapFactory.getSymMap();
   }
 
