@@ -1,6 +1,6 @@
 #include <opensteno/DictionaryLoader.hpp>
 
 namespace opensteno {
-  void DictionaryLoader::load() {
+  void DictionaryLoader::getDictionaryFromFile(std::string filename) {
   }
 } /* namespace opensteno */
