@@ -1,7 +1,7 @@
 #include <opensteno/WindowSystemDriver.hpp>
 #include <opensteno/DictionaryLoader.hpp>
 #include <sstream>
-
+#include <experimental/filesystem>
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
     helper = WindowSystemDriverHelper();
@@ -9,7 +9,8 @@ namespace opensteno {
     stroke.resetButtons();
     keyMap = keyMapFactory.getNeoKeyMap(stenoboard);
     strokeKeyMap = keyMapFactory.getNeoKeyMap(stroke);
-    dictionary = DictionaryLoader::getDictionaryFromFile("test.json");
+    std::string filePath = "../data/dictionary.json";
+    dictionary = DictionaryLoader::getDictionaryFromFile(filePath);
     keySymMap = keyMapFactory.getSymMap();
   }
 

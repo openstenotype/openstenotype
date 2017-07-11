@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <json11/json11.hpp>
+#include <fstream>
 
 namespace opensteno {
   class DictionaryLoader {
