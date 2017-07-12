@@ -10,8 +10,6 @@ namespace opensteno {
     json11::Json configJson = getJsonFromJsonString(fileContent);
     dictionary = getDictionaryFromJson(configJson);
 
-    dictionary.insert( std::pair<std::string, std::string >("KWR", "<exit>"));
-
     return dictionary;
   }
 
