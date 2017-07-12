@@ -10,6 +10,8 @@ namespace opensteno {
   class DictionaryLoader {
   public:
     static std::map <std::string, std::string> getDictionaryFromFile(std::string filename);
+  private:
+    static std::string getJsonStringFromFile(std::string filename);
   };
 } /* namespace opensteno */
 #endif //OPENSTENO_DICTIONARY_LOADER_HPP

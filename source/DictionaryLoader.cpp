@@ -6,9 +6,25 @@ namespace opensteno {
   std::map <std::string, std::string> DictionaryLoader::getDictionaryFromFile(std::string filename) {
     std::map <std::string, std::string> dictionary;
     std::string fileContent, error;
-    std::ifstream in(filename, std::ios::in | std::ios::binary);
     std::map<std::string, std::string>::iterator dictionaryIterator;
 
+    fileContent = getJsonStringFromFile(filename);
+
+    json11::Json configJson = json11::Json::parse(fileContent, error);
+    std::map<std::string, json11::Json>::iterator iterator;
+    json11::Json::object jsonObject = configJson.object_items();
+
+    for (iterator = jsonObject.begin(); iterator != jsonObject.end(); ++iterator) {
+      dictionary.insert( std::pair<std::string, std::string >(iterator->first, iterator->second.string_value()));
+    }
+    dictionary.insert( std::pair<std::string, std::string >("KWR", "<exit>"));
+
+    return dictionary;
+  }
+
+  std::string DictionaryLoader::getJsonStringFromFile(std::string filename){
+    std::string fileContent, error;
+    std::ifstream in(filename, std::ios::in | std::ios::binary);
     if (in) {
       in.seekg(0, std::ios::end);
       fileContent.resize(in.tellg());
@@ -20,17 +36,7 @@ namespace opensteno {
                                filename + ": " +
                                std::strerror(errno));
     }
-    json11::Json configJson = json11::Json::parse(fileContent, error);
 
-    std::map<std::string, json11::Json>::iterator iterator;
-
-    json11::Json::object jsonObject = configJson.object_items();
-
-    for (iterator = jsonObject.begin(); iterator != jsonObject.end(); ++iterator) {
-      dictionary.insert( std::pair<std::string, std::string >(iterator->first, iterator->second.string_value()));
-    }
-    dictionary.insert( std::pair<std::string, std::string >("KWR", "<exit>"));
-
-    return dictionary;
+    return fileContent;
   }
 } /* namespace opensteno */
