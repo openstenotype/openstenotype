@@ -1,7 +1,6 @@
 #include <opensteno/WindowSystemDriver.hpp>
 #include <opensteno/DictionaryLoader.hpp>
 #include <sstream>
-#include <experimental/filesystem>
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
     helper = WindowSystemDriverHelper();
