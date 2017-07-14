@@ -163,6 +163,21 @@ public:
    */
   std::string getString(){
     std::string string = "";
+    string.append(getLeftString());
+    if (*left.asterisk1.get() || *left.asterisk2.get() ||
+        *right.asterisk1.get() || *right.asterisk2.get() ) {
+      string.append("*");
+    }
+    std::string rightString = getRightString();
+    if (rightString != "") {
+      string.append("-");
+      string.append(rightString);
+    }
+    return string;
+  }
+
+  std::string getLeftString(){
+    std::string string = "";
     if (*left.s1.get() || *left.s2.get()) {
       string.append("S");
     }
@@ -199,10 +214,11 @@ public:
       string.append("O");
     }
 
-    if (*left.asterisk1.get() || *left.asterisk2.get() ||
-        *right.asterisk1.get() || *right.asterisk2.get() ) {
-      string.append("*");
-    }
+    return string;
+  }
+
+  std::string getRightString(){
+    std::string string = "";
 
     if (*right.e.get()) {
       string.append("E");
@@ -255,5 +271,6 @@ public:
     return string;
   }
 };
+
 } /* namespace opensteno */
 #endif //OPENSTENO_STENOBOARD_HPP
