@@ -12,7 +12,6 @@ namespace opensteno {
     static std::map <std::string, std::string> getDictionaryFromFile(std::string filename);
   private:
     static std::string getJsonStringFromFile(std::string filename);
-    static json11::Json getJsonFromJsonString(std::string jsonString);
     static std::map <std::string, std::string> getDictionaryFromJson(json11::Json json);
   };
 } /* namespace opensteno */
