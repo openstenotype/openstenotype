@@ -1,4 +1,5 @@
 #include <opensteno/DictionaryLoader.hpp>
+#include <opensteno/JsonLoader.hpp>
 #include <cstring>
 #include <iostream>
 
@@ -6,9 +7,8 @@ namespace opensteno {
   std::map <std::string, std::string> DictionaryLoader::getDictionaryFromFile(std::string filename) {
     std::map <std::string, std::string> dictionary;
 
-    std::string fileContent = getJsonStringFromFile(filename);
-    json11::Json configJson = getJsonFromJsonString(fileContent);
-    dictionary = getDictionaryFromJson(configJson);
+    json11::Json json = JsonLoader::getJsonFromFile(filename);
+    dictionary = getDictionaryFromJson(json);
 
     return dictionary;
   }
