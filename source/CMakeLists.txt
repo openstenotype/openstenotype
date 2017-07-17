@@ -7,6 +7,7 @@ endif()
 add_executable(${EXE_NAME}
   Main.cpp
   JsonLoader.cpp
+  Config.cpp
   DictionaryLoader.cpp
   WindowSystem.cpp
   WindowSystemDriver.cpp
