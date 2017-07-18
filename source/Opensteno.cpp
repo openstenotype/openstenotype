@@ -1,7 +1,7 @@
 #include <opensteno/Opensteno.hpp>
 
 namespace opensteno {
-  Opensteno::Opensteno():driver(windowSystem) {
+  Opensteno::Opensteno():config(std::string("../data/config.json")), driver(config, windowSystem) {
   }
 
   bool Opensteno::isRunning() {

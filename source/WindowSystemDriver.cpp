@@ -2,7 +2,9 @@
 #include <opensteno/DictionaryLoader.hpp>
 #include <sstream>
 namespace opensteno {
-  WindowSystemDriver::WindowSystemDriver(WindowSystem& windowSystem):windowSystem(windowSystem), shutdown(false) {
+  WindowSystemDriver::WindowSystemDriver(Config& config,
+                                         WindowSystem& windowSystem):
+    config(config), windowSystem(windowSystem), shutdown(false) {
     helper = WindowSystemDriverHelper();
     stenoboard.resetButtons();
     stroke.resetButtons();
