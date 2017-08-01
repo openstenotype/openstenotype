@@ -7,5 +7,5 @@ add_subdirectory("${LOGGER_INCLUDE_DIR}/logger")
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(logger DEFAULT_MSG LOGGER_LIBRARIES LOGGER_INCLUDE_DIR LOGGER_INCLUDE_DIRS)
-
+MESSAGE( STATUS "findlogger: " ${LOGGER_INCLUDE_DIR} )
 mark_as_advanced(LOGGER_LIBRARY LOGGER_LIBRARIES LOGGER_INCLUDE_DIR LOGGER_INCLUDE_DIRS)
