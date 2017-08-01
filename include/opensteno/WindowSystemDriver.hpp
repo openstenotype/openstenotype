@@ -5,6 +5,7 @@
 #include <opensteno/WindowSystemDriverHelper.hpp>
 #include <opensteno/KeyMapFactory.hpp>
 #include <opensteno/Config.hpp>
+#include <logger/include/LoggerFactory.hpp>
 #include <map>
 #include <memory>
 
@@ -15,6 +16,7 @@ namespace opensteno {
     Stenoboard stroke;
     KeyMapFactory keyMapFactory;
     Config& config;
+    logger::LoggerFactory& logger;
     WindowSystem& windowSystem;
     WindowSystemDriverHelper helper;
     bool shutdown;
@@ -27,7 +29,7 @@ namespace opensteno {
     void processStroke();
   public:
     bool receivedShutdownCommand();
-    WindowSystemDriver(Config& config, WindowSystem& windowSystem);
+    WindowSystemDriver(Config& config, logger::LoggerFactory& logger, WindowSystem& windowSystem);
     void update();
     Stenoboard getStenoboard();
   };

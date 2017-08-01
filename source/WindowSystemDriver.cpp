@@ -3,8 +3,9 @@
 #include <sstream>
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(Config& config,
+                                         logger::LoggerFactory& logger,
                                          WindowSystem& windowSystem):
-    config(config), windowSystem(windowSystem), shutdown(false) {
+    config(config), logger(logger), windowSystem(windowSystem), shutdown(false) {
     helper = WindowSystemDriverHelper();
     stenoboard.resetButtons();
     stroke.resetButtons();
