@@ -4,6 +4,6 @@ A free and open steno software for GNU/Linux. It will change the keyboard behavi
 in sequence to produce a word letter by letter you hold down multiple keys at once to produce whole words and sentences.
 
 Compile with
-cmake ./; make; make run;
+```cmake ./; make; make run;```
 
 To exit opensteno you have to stroke KWR.
