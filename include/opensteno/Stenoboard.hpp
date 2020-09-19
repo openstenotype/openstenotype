@@ -7,37 +7,29 @@
 
 namespace opensteno {
 struct StenoboardLeft {
-  std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
-
   std::shared_ptr<bool> fn1 = std::make_shared<bool>(false);
   std::shared_ptr<bool> s1  = std::make_shared<bool>(false);
   std::shared_ptr<bool> t   = std::make_shared<bool>(false);
   std::shared_ptr<bool> p   = std::make_shared<bool>(false);
   std::shared_ptr<bool> h   = std::make_shared<bool>(false);
-  std::shared_ptr<bool> asterisk1 = std::make_shared<bool>(false);
 
   std::shared_ptr<bool> fn2 = std::make_shared<bool>(false);
   std::shared_ptr<bool> s2  = std::make_shared<bool>(false);
   std::shared_ptr<bool> k   = std::make_shared<bool>(false);
   std::shared_ptr<bool> w   = std::make_shared<bool>(false);
   std::shared_ptr<bool> r   = std::make_shared<bool>(false);
-  std::shared_ptr<bool> asterisk2 = std::make_shared<bool>(false);
 
   std::shared_ptr<bool> a   = std::make_shared<bool>(false);
   std::shared_ptr<bool> o   = std::make_shared<bool>(false);
 };
 
 struct StenoboardRight {
-  std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
-
-  std::shared_ptr<bool> asterisk1 = std::make_shared<bool>(false);
   std::shared_ptr<bool> f = std::make_shared<bool>(false);
   std::shared_ptr<bool> p = std::make_shared<bool>(false);
   std::shared_ptr<bool> l = std::make_shared<bool>(false);
   std::shared_ptr<bool> t = std::make_shared<bool>(false);
   std::shared_ptr<bool> d = std::make_shared<bool>(false);
 
-  std::shared_ptr<bool> asterisk2 = std::make_shared<bool>(false);
   std::shared_ptr<bool> r = std::make_shared<bool>(false);
   std::shared_ptr<bool> b = std::make_shared<bool>(false);
   std::shared_ptr<bool> g = std::make_shared<bool>(false);
@@ -50,7 +42,6 @@ struct StenoboardRight {
 
 struct Stenoboard {
 public:
-  //15 buttons per side
   StenoboardLeft  left;
   StenoboardRight right;
   std::shared_ptr<bool> numberBar = std::make_shared<bool>(false);
@@ -79,7 +70,7 @@ public:
     *left.t.get() ||
     *left.p.get() ||
     *left.h.get() ||
-    *left.asterisk1.get();
+    *asterisk1.get();
 
     bool bottomRow =
     *left.fn2.get() ||
@@ -87,7 +78,7 @@ public:
     *left.k.get() ||
     *left.w.get() ||
     *left.r.get() ||
-    *left.asterisk2.get();
+    *asterisk2.get();
 
     bool thumbRow =
     *left.a.get() ||
@@ -98,7 +89,7 @@ public:
 
   bool rightButtonsReleased(){
     bool topRow =
-    *right.asterisk1.get() ||
+    *asterisk1.get() ||
     *right.f.get() ||
     *right.p.get() ||
     *right.l.get() ||
@@ -106,7 +97,7 @@ public:
     *right.d.get();
 
     bool bottomRow =
-    *right.asterisk2.get() ||
+    *asterisk2.get() ||
     *right.r.get() ||
     *right.b.get() ||
     *right.g.get() ||
@@ -126,28 +117,28 @@ public:
     *left.t.get() = false;
     *left.p.get() = false;
     *left.h.get() = false;
-    *left.asterisk1.get() = false;
+    *asterisk1.get() = false;
 
     *left.fn2.get() = false;
     *left.s2.get() = false;
     *left.k.get() = false;
     *left.w.get() = false;
     *left.r.get() = false;
-    *left.asterisk2.get() = false;
+    *asterisk2.get() = false;
 
     *left.a.get() = false;
     *left.o.get() = false;
   }
 
   void resetRightButtons(){
-    *right.asterisk1.get() = false;
+    *asterisk1.get() = false;
     *right.f.get() = false;
     *right.p.get() = false;
     *right.l.get() = false;
     *right.t.get() = false;
     *right.d.get() = false;
 
-    *right.asterisk2.get() = false;
+    *asterisk2.get() = false;
     *right.r.get() = false;
     *right.b.get() = false;
     *right.g.get() = false;
@@ -164,8 +155,7 @@ public:
   std::string getString(){
     std::string string = "";
     string.append(getLeftString());
-    if (*left.asterisk1.get() || *left.asterisk2.get() ||
-        *right.asterisk1.get() || *right.asterisk2.get() ) {
+    if (*asterisk1.get() || *asterisk2.get()) {
       string.append("*");
     }
     std::string rightString = getRightString();
