@@ -1,6 +1,7 @@
 {
   "T*": "t",
   "P*": "p",
+  "P*P": "x",
   "O*": "o",
   "A": "a",
   "KW*": "q",
@@ -9,5 +10,14 @@
   "T": "the",
   "WUB": "one",
   "WU": "with you",
+  "S*R": "<mod>1",
+  "T*R": "<mod>2",
+  "P*R": "<mod>3",
+  "H*R": "<mod>4",
+  "#T-R": "<mod>2",
+  "#P-R": "<mod>3",
+  "#H-R": "<mod>4",
+  "KR": "<ctrl>c",
+  "SR-F": "<ctrl>v",
   "KWR": "<exit>"
 }

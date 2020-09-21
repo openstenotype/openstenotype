@@ -18,13 +18,16 @@ class WindowSystem {
 public:
   WindowSystem();
   ~WindowSystem();
-  void simulateKeypress(int key);
+  void simulateKeypressRelease(int key, unsigned int modifiers);
+  void simulateKeypressRelease(int key);
+  void simulateKeypress(int key, unsigned int modifiers);
+  void simulateKeyrelease(int key, unsigned int modifiers);
   XEvent getNextEvent();
   KeySym getKeySymFromEvent(XEvent event);
 private:
   Display* display;
   void grabKeyboard();
-  XKeyEvent createKeyEvent(Window &win, bool press, int keycode, int modifiers);
+  XKeyEvent createKeyEvent(Window &win, bool press, int keycode, unsigned int modifiers);
 };
 } /* namespace opensteno */
 #endif //OPENSTENO_WINDOW_SYSTEM_HPP

@@ -27,6 +27,7 @@ namespace opensteno {
     void registerKeyPress(KeySym key);
     void registerKeyRelease(KeySym key);
     void processStroke();
+    void processDictionaryEntry(std::string);
   public:
     bool receivedShutdownCommand();
     WindowSystemDriver(Config& config, logger::LoggerFactory& logger, WindowSystem& windowSystem);
