@@ -34,22 +34,34 @@ namespace opensteno {
     return key;
   }
 
-  void WindowSystem::simulateKeypress(int key) {
-    Window winFocus;
-    int revert;
-    XGetInputFocus(display, &winFocus, &revert);
+  void WindowSystem::simulateKeypressRelease(int key) {
+    simulateKeypressRelease(key, 0);
+  }
 
-    // Send a key press event to the window.
-    XKeyEvent event = createKeyEvent(winFocus, true,  key, 0);
-    XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
-    std::this_thread::sleep_for(std::chrono::milliseconds(2));
-    // Send a key release event to the window.
-    event = createKeyEvent(winFocus, false, key, 0);
-    XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+  void WindowSystem::simulateKeypressRelease(int key, unsigned int modifiers) {
+    simulateKeypress(key, modifiers);
+    simulateKeyrelease(key, modifiers);
     // For key codes check http://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
   }
 
-  XKeyEvent WindowSystem::createKeyEvent(Window &win, bool press, int keycode, int modifiers) {
+  void WindowSystem::simulateKeypress(int key, unsigned int modifiers) {
+    Window winFocus;
+    int revert;
+    XGetInputFocus(display, &winFocus, &revert);
+    XKeyEvent event = createKeyEvent(winFocus, true,  key, modifiers);
+    XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+    std::this_thread::sleep_for(std::chrono::milliseconds(4));
+  }
+
+  void WindowSystem::simulateKeyrelease(int key, unsigned int modifiers) {
+    Window winFocus;
+    int revert;
+    XGetInputFocus(display, &winFocus, &revert);
+    XKeyEvent event = createKeyEvent(winFocus, false, key, modifiers);
+    XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+  }
+
+  XKeyEvent WindowSystem::createKeyEvent(Window &win, bool press, int keycode, unsigned int modifiers) {
     XKeyEvent event;
 
     event.display     = display;

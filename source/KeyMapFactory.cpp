@@ -128,7 +128,18 @@ namespace opensteno {
     keySymMap.insert( std::pair<std::string, KeySym>("X", XK_X));
     keySymMap.insert( std::pair<std::string, KeySym>("Y", XK_Y));
     keySymMap.insert( std::pair<std::string, KeySym>("Z", XK_Z));
-
+    keySymMap.insert( std::pair<std::string, KeySym>("0", XK_0));
+    keySymMap.insert( std::pair<std::string, KeySym>("1", XK_1));
+    keySymMap.insert( std::pair<std::string, KeySym>("2", XK_2));
+    keySymMap.insert( std::pair<std::string, KeySym>("3", XK_3));
+    keySymMap.insert( std::pair<std::string, KeySym>("4", XK_4));
+    keySymMap.insert( std::pair<std::string, KeySym>("5", XK_5));
+    keySymMap.insert( std::pair<std::string, KeySym>("6", XK_6));
+    keySymMap.insert( std::pair<std::string, KeySym>("7", XK_7));
+    keySymMap.insert( std::pair<std::string, KeySym>("8", XK_8));
+    keySymMap.insert( std::pair<std::string, KeySym>("9", XK_9));
+    keySymMap.insert( std::pair<std::string, KeySym>("mod", XK_Super_L));
+    keySymMap.insert( std::pair<std::string, KeySym>("ctrl", XK_Control_L));
     return keySymMap;
   }
 

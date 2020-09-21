@@ -31,22 +31,50 @@ namespace opensteno {
 
   void WindowSystemDriver::processStroke() {
     std::map<std::string, std::string>::iterator dictionaryIterator;
-    std::map<std::string, KeySym>::iterator keySymMapIterator;
+    std::cout << "Stroked: " << stroke.getString() << std::endl;
     dictionaryIterator = dictionary.find(stroke.getString());
     if (dictionaryIterator != dictionary.end()) {
       if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
         shutdown = true;
       } else {
-        for(char character : dictionaryIterator->second) {
-          std::string characterString = helper.charToString(character);
-          keySymMapIterator = keySymMap.find(characterString);
+        processDictionaryEntry(dictionaryIterator->second);
+      }
+    }
+  }
 
-          if(keySymMap.find(characterString) != keySymMap.end()) {
-            windowSystem.simulateKeypress(keySymMapIterator->second);
-          }
+  void WindowSystemDriver::processDictionaryEntry(std::string entry) {
+    std::map<std::string, KeySym>::iterator keySymMapIterator;
+    bool modifierParsing = false;
+    std::string modifierString;
+    char previousCharacter;
+    unsigned int modifiers = 0;
+    for(char character : entry) {
+      if (character == '<') {
+        modifierParsing = true;
+      }
+      if (character == '>') {
+        if (modifierString == "mod") {
+          modifiers = Mod4Mask;
+        }
+        modifierParsing = false;
+        modifierString = "";
+      }
+      if (modifierParsing) {
+        if (character != '<' && character != '>') {
+          modifierString.append(helper.charToString(character));
+        }
+      } else {
+        std::string characterString = helper.charToString(character);
+        keySymMapIterator = keySymMap.find(characterString);
+        if(keySymMap.find(characterString) != keySymMap.end()) {
+          windowSystem.simulateKeypressRelease(keySymMapIterator->second, modifiers);
+          modifiers = 0;
+          modifierString = "";
         }
       }
+
+      previousCharacter = character;
     }
   }
 

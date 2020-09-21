@@ -154,15 +154,16 @@ public:
    */
   std::string getString(){
     std::string string = "";
-    string.append(getLeftString());
+    std::string rightString = getRightString();
+    std::string leftString = getLeftString();
+    string.append(leftString);
     if (*asterisk1.get() || *asterisk2.get()) {
       string.append("*");
-    }
-    std::string rightString = getRightString();
-    if (rightString != "") {
+    } else if (rightString != "" && leftString != "") {
       string.append("-");
-      string.append(rightString);
     }
+    string.append(rightString);
+    
     return string;
   }
 
