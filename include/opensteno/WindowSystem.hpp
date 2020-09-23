@@ -12,7 +12,6 @@
 #include <chrono>
 #include <thread>
 
-
 namespace opensteno {
 class WindowSystem {
 public:
@@ -22,6 +21,7 @@ public:
   void simulateKeypressRelease(int key);
   void simulateKeypress(int key, unsigned int modifiers);
   void simulateKeyrelease(int key, unsigned int modifiers);
+  void switchToDesktop(unsigned int desktop);
   XEvent getNextEvent();
   KeySym getKeySymFromEvent(XEvent event);
 private:

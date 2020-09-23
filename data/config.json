@@ -1,3 +1,4 @@
 {
-  "debug": "info"
+  "debug": "info",
+  "layout": "neo"
 }

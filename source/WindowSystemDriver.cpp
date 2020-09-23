@@ -34,7 +34,15 @@ namespace opensteno {
     std::cout << "Stroked: " << stroke.getString() << std::endl;
     dictionaryIterator = dictionary.find(stroke.getString());
     if (dictionaryIterator != dictionary.end()) {
-      if (dictionaryIterator->second == "<exit>") {
+      if (dictionaryIterator->second == "<desktop-1>") {
+        windowSystem.switchToDesktop(1);
+      } else if (dictionaryIterator->second == "<desktop-2>") {
+        windowSystem.switchToDesktop(2);
+      } else if (dictionaryIterator->second == "<desktop-3>") {
+        windowSystem.switchToDesktop(3);
+      } else if (dictionaryIterator->second == "<desktop-4>") {
+        windowSystem.switchToDesktop(4);
+      } else if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
         shutdown = true;
       } else {
@@ -56,6 +64,12 @@ namespace opensteno {
       if (character == '>') {
         if (modifierString == "mod") {
           modifiers = Mod4Mask;
+        }
+        if (modifierString == "ctrl") {
+          modifiers = ControlMask;
+        }
+        if (modifierString == "shift") {
+          modifiers = ShiftMask;
         }
         modifierParsing = false;
         modifierString = "";
