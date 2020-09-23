@@ -18,6 +18,7 @@ namespace opensteno {
   void WindowSystem::grabKeyboard() {
     XGrabKeyboard(display, DefaultRootWindow(display), false,
                   GrabModeAsync, GrabModeAsync, CurrentTime);
+
   }
 
   XEvent WindowSystem::getNextEvent() {
@@ -39,6 +40,9 @@ namespace opensteno {
   }
 
   void WindowSystem::simulateKeypressRelease(int key, unsigned int modifiers) {
+    Window winFocus;
+    int revert;
+    XGetInputFocus(display, &winFocus, &revert);
     simulateKeypress(key, modifiers);
     simulateKeyrelease(key, modifiers);
     // For key codes check http://www.cl.cam.ac.uk/~mgk25/ucs/keysymdef.h
@@ -50,7 +54,7 @@ namespace opensteno {
     XGetInputFocus(display, &winFocus, &revert);
     XKeyEvent event = createKeyEvent(winFocus, true,  key, modifiers);
     XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
-    std::this_thread::sleep_for(std::chrono::milliseconds(4));
+    std::this_thread::sleep_for(std::chrono::milliseconds(40));
   }
 
   void WindowSystem::simulateKeyrelease(int key, unsigned int modifiers) {
@@ -58,7 +62,25 @@ namespace opensteno {
     int revert;
     XGetInputFocus(display, &winFocus, &revert);
     XKeyEvent event = createKeyEvent(winFocus, false, key, modifiers);
-    XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
+    XSendEvent(event.display, event.window, True, KeyReleaseMask, (XEvent *)&event);
+  }
+
+  void WindowSystem::switchToDesktop(unsigned int desktop) {
+    XEvent event;
+    Window root;
+
+    root = RootWindow(display, 0);
+    memset(&event, 0, sizeof(event));
+    event.type = ClientMessage;
+    event.xclient.display = display;
+    event.xclient.window = root;
+    event.xclient.message_type = XInternAtom(display, "_NET_CURRENT_DESKTOP",
+                                             False);
+    event.xclient.format = 32;
+    event.xclient.data.l[0] = desktop;
+    event.xclient.data.l[1] = CurrentTime;
+
+    XSendEvent(display, root, False, SubstructureNotifyMask | SubstructureRedirectMask, &event);
   }
 
   XKeyEvent WindowSystem::createKeyEvent(Window &win, bool press, int keycode, unsigned int modifiers) {
