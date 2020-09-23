@@ -31,7 +31,7 @@ namespace opensteno {
 
   void WindowSystemDriver::processStroke() {
     std::map<std::string, std::string>::iterator dictionaryIterator;
-    std::cout << "Stroked: " << stroke.getString() << std::endl;
+    logger.log(logger::LogLevel::Info, std::string("System")) << "Stroked: " << stroke.getString();
     dictionaryIterator = dictionary.find(stroke.getString());
     if (dictionaryIterator != dictionary.end()) {
       if (dictionaryIterator->second == "<desktop-1>") {
@@ -44,6 +44,7 @@ namespace opensteno {
         windowSystem.switchToDesktop(4);
       } else if (dictionaryIterator->second == "<exit>") {
         std::cout << "Exiting" << std::endl;
+        logger.log(logger::LogLevel::Info, std::string("System")) << "Exiting ";
         shutdown = true;
       } else {
         processDictionaryEntry(dictionaryIterator->second);
@@ -55,7 +56,6 @@ namespace opensteno {
     std::map<std::string, KeySym>::iterator keySymMapIterator;
     bool modifierParsing = false;
     std::string modifierString;
-    char previousCharacter;
     unsigned int modifiers = 0;
     for(char character : entry) {
       if (character == '<') {
@@ -87,8 +87,6 @@ namespace opensteno {
           modifierString = "";
         }
       }
-
-      previousCharacter = character;
     }
   }
 
