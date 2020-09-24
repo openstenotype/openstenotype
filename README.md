@@ -3,7 +3,7 @@
 A free and open steno software for GNU/Linux. It will change the keyboard behaviour so that instead of pushing keys
 in sequence to produce a word letter by letter you hold down multiple keys at once to produce whole words and sentences.
 
-To use with qwertz layout change (WindowSystemDriver.cpp Line 13)[https://github.com/opensteno/opensteno/blob/master/source/WindowSystemDriver.cpp#L13] from ```strokeKeyMap = keyMapFactory.getNeoKeyMap(stroke);``` to ```strokeKeyMap = keyMapFactory.getQwertzKeyMap(stroke); ```
+To use with qwertz layout change [WindowSystemDriver.cpp Line 13](https://github.com/opensteno/opensteno/blob/master/source/WindowSystemDriver.cpp#L13) from ```strokeKeyMap = keyMapFactory.getNeoKeyMap(stroke);``` to ```strokeKeyMap = keyMapFactory.getQwertzKeyMap(stroke); ```
 
 Compile with
 ```cmake ./; make; make run;```
