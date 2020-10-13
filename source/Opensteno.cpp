@@ -3,7 +3,9 @@ namespace opensteno {
   Opensteno::Opensteno():
     config(std::string("../data/config.json")),
     logger(*new logger::AnsiConsoleLogger()),
-    driver(config, logger, windowSystem)
+    commandInterpreter(logger, windowSystem),
+    commandParser(logger, commandInterpreter),
+    driver(config, logger, windowSystem, commandParser)
   {
     logger.log(logger::LogLevel::Info, std::string("System")) << "Opensteno Started";
   }

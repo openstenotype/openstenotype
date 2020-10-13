@@ -5,6 +5,7 @@
 #include <opensteno/WindowSystemDriverHelper.hpp>
 #include <opensteno/KeyMapFactory.hpp>
 #include <opensteno/Config.hpp>
+#include <opensteno/CommandParser.hpp>
 #include <logger/include/LoggerFactory.hpp>
 #include <map>
 #include <memory>
@@ -20,6 +21,7 @@ namespace opensteno {
     WindowSystem& windowSystem;
     WindowSystemDriverHelper helper;
     bool shutdown;
+    CommandParser& commandParser;
     std::map <KeySym, std::shared_ptr<bool> > keyMap;
     std::map <KeySym, std::shared_ptr<bool> > strokeKeyMap;
     std::map <std::string, std::string> dictionary;
@@ -30,7 +32,7 @@ namespace opensteno {
     void processDictionaryEntry(std::string);
   public:
     bool receivedShutdownCommand();
-    WindowSystemDriver(Config& config, logger::LoggerFactory& logger, WindowSystem& windowSystem);
+    WindowSystemDriver(Config& config, logger::LoggerFactory& logger, WindowSystem& windowSystem, CommandParser& commandParser);
     void update();
     Stenoboard getStenoboard();
   };

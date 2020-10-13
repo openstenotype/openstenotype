@@ -10,6 +10,8 @@ add_executable(${EXE_NAME}
   Config.cpp
   DictionaryLoader.cpp
   WindowSystem.cpp
+  CommandInterpreter.cpp
+  CommandParser.cpp
   WindowSystemDriver.cpp
   WindowSystemDriverHelper.cpp
   Opensteno.cpp
