@@ -8,4 +8,4 @@ To use with qwertz layout change [WindowSystemDriver.cpp Line 13](https://github
 Compile with
 ```cmake ./; make; make run;```
 
-To exit opensteno you have to stroke KWR.
+To exit opensteno you have to stroke KWR-RBG.
