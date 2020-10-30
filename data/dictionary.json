@@ -39,5 +39,5 @@
   "#H-R": "<mod>4",
   "KR": "<ctrl>c",
   "SR-F": "<ctrl>v",
-  "KWR-RBG": "<exit>"
+  "KWR-RBG": "{PLOVER:QUIT}"
 }

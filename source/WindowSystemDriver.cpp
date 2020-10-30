@@ -36,7 +36,7 @@ namespace opensteno {
     logger.log(logger::LogLevel::Info, std::string("System")) << "Stroked: " << stroke.getString();
     dictionaryIterator = dictionary.find(stroke.getString());
     if (dictionaryIterator != dictionary.end()) {
-      if (dictionaryIterator->second == "<exit>") {
+      if (dictionaryIterator->second == "{PLOVER:QUIT}") {
         std::cout << "Exiting" << std::endl;
         logger.log(logger::LogLevel::Info, std::string("System")) << "Exiting ";
         shutdown = true;
