@@ -3,14 +3,14 @@
 #include <opensteno/Stenoboard.hpp>
 #include <opensteno/WindowSystem.hpp>
 #include <opensteno/KeyMapFactory.hpp>
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 namespace opensteno {
   class WindowSystemDriverHelper {
   public:
     void registerKey(KeySym key,
-                     std::map<KeySym, std::shared_ptr<bool>> map,
+                     std::unordered_map<KeySym, std::shared_ptr<bool>> map,
                      bool value);
     std::string charToString(char character);
   };

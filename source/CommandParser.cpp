@@ -15,7 +15,7 @@ namespace opensteno {
   }
 
   void CommandParser::processCommandChar(char character){
-    std::map<std::string, KeySym>::iterator keySymMapIterator;
+    std::unordered_map<std::string, KeySym>::iterator keySymMapIterator;
     if (character == '<') {
       modifierParsing = true;
     }
