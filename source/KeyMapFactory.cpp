@@ -4,8 +4,8 @@ namespace opensteno {
   KeyMapFactory::KeyMapFactory() {
   }
 
-  std::map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getNeoKeyMap(Stenoboard stenoboard) {
-    std::map <KeySym, std::shared_ptr<bool> > keyMap;
+  std::unordered_map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getNeoKeyMap(Stenoboard stenoboard) {
+    std::unordered_map <KeySym, std::shared_ptr<bool> > keyMap;
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_3, stenoboard.numberBar));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_w, stenoboard.asterisk1));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_o, stenoboard.asterisk2));
@@ -39,8 +39,8 @@ namespace opensteno {
     return keyMap;
   }
 
-  std::map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getQwertzKeyMap(Stenoboard stenoboard) {
-    std::map <KeySym, std::shared_ptr<bool> > keyMap;
+  std::unordered_map <KeySym, std::shared_ptr<bool> > KeyMapFactory::getQwertzKeyMap(Stenoboard stenoboard) {
+    std::unordered_map <KeySym, std::shared_ptr<bool> > keyMap;
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_3, stenoboard.numberBar));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_t, stenoboard.asterisk1));
     keyMap.insert( std::pair<KeySym, std::shared_ptr<bool>  >(XK_g, stenoboard.asterisk2));
@@ -74,8 +74,8 @@ namespace opensteno {
     return keyMap;
   }
 
-  std::map <std::string, KeySym> KeyMapFactory::getSymMap() {
-    std::map <std::string, KeySym> keySymMap;
+  std::unordered_map <std::string, KeySym> KeyMapFactory::getSymMap() {
+    std::unordered_map <std::string, KeySym> keySymMap;
     keySymMap.insert( std::pair<std::string, KeySym>("a", XK_a));
     keySymMap.insert( std::pair<std::string, KeySym>("b", XK_b));
     keySymMap.insert( std::pair<std::string, KeySym>("c", XK_c));

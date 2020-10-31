@@ -7,7 +7,7 @@
 #include <opensteno/Config.hpp>
 #include <opensteno/CommandParser.hpp>
 #include <logger/include/LoggerFactory.hpp>
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 namespace opensteno {
@@ -22,10 +22,10 @@ namespace opensteno {
     WindowSystemDriverHelper helper;
     bool shutdown;
     CommandParser& commandParser;
-    std::map <KeySym, std::shared_ptr<bool> > keyMap;
-    std::map <KeySym, std::shared_ptr<bool> > strokeKeyMap;
+    std::unordered_map <KeySym, std::shared_ptr<bool> > keyMap;
+    std::unordered_map <KeySym, std::shared_ptr<bool> > strokeKeyMap;
     std::map <std::string, std::string> dictionary;
-    std::map <std::string, KeySym> keySymMap;
+    std::unordered_map <std::string, KeySym> keySymMap;
     void registerKeyPress(KeySym key);
     void registerKeyRelease(KeySym key);
     void processStroke();

@@ -12,9 +12,9 @@ namespace opensteno {
   }
 
   void WindowSystemDriverHelper::registerKey(KeySym key,
-                                       std::map<KeySym, std::shared_ptr<bool> > map,
+                                       std::unordered_map<KeySym, std::shared_ptr<bool> > map,
                                        bool value) {
-    std::map<KeySym, std::shared_ptr<bool> >::iterator mapIterator;
+    std::unordered_map<KeySym, std::shared_ptr<bool> >::iterator mapIterator;
     mapIterator = map.find(key);
     if(mapIterator != map.end()) {
       *mapIterator->second.get() = value;

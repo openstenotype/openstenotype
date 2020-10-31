@@ -2,7 +2,7 @@
 #define OPENSTENO_DICTIONARY_LOADER_HPP
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <json11/json11.hpp>
 #include <fstream>
 
