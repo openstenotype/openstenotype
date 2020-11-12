@@ -12,6 +12,7 @@ namespace opensteno {
     std::unordered_map <KeySym, std::shared_ptr<bool> > getNeoKeyMap(Stenoboard stenoboard);
     std::unordered_map <KeySym, std::shared_ptr<bool> > getQwertzKeyMap(Stenoboard stenoboard);
     std::unordered_map <std::string, KeySym> getSymMap();
+    std::unordered_map <std::string, unsigned int> getModifierMap();
   };
 } /* namespace opensteno */
 #endif //OPENSTENO_KEY_MAP_FACTORY_HPP

@@ -143,4 +143,12 @@ namespace opensteno {
     return keySymMap;
   }
 
+  std::unordered_map <std::string, unsigned int> KeyMapFactory::getModifierMap() {
+    std::unordered_map <std::string, unsigned int> modifierMap;
+    modifierMap.insert(std::pair<std::string, unsigned int>("Control_L", ControlMask));
+    modifierMap.insert(std::pair<std::string, unsigned int>("Super_L", Mod4Mask));
+    modifierMap.insert(std::pair<std::string, unsigned int>("Shift", ShiftMask));
+    modifierMap.insert(std::pair<std::string, unsigned int>("Shift_L", ShiftMask));
+    return modifierMap;
+  }
 } /* namespace opensteno */

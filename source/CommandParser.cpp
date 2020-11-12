@@ -5,6 +5,7 @@ namespace opensteno {
                                CommandInterpreter& commandInterpreter):
     logger(logger), commandInterpreter(commandInterpreter) {
     keySymMap = keyMapFactory.getSymMap();
+    modifierMap = keyMapFactory.getModifierMap();
   }
   void CommandParser::processCommandString(std::string commandString) {
     if(!commandInterpreter.executeCommand(commandString)){
@@ -16,24 +17,20 @@ namespace opensteno {
 
   void CommandParser::processCommandChar(char character){
     std::unordered_map<std::string, KeySym>::iterator keySymMapIterator;
-    if (character == '<') {
+    std::unordered_map<std::string, unsigned int>::iterator modifierMapIterator;
+    if (character == '{') {
       modifierParsing = true;
     }
-    if (character == '>') {
-      if (modifierString == "mod") {
-        modifiers = Mod4Mask;
-      }
-      if (modifierString == "ctrl") {
-        modifiers = ControlMask;
-      }
-      if (modifierString == "shift") {
-        modifiers = ShiftMask;
+    if (character == '}') {
+      modifierMapIterator = modifierMap.find(modifierString);
+      if(modifierMap.find(modifierString) != modifierMap.end()) {
+        modifiers = modifierMapIterator->second;
       }
       modifierParsing = false;
       modifierString = "";
     }
     if (modifierParsing) {
-      if (character != '<' && character != '>') {
+      if (character != '{' && character != '}') {
         modifierString.append(helper.charToString(character));
       }
     } else {

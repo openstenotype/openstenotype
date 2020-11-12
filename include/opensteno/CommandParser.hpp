@@ -16,6 +16,7 @@ namespace opensteno {
     CommandInterpreter& commandInterpreter;
     void processCommandChar(char commandChar);
     std::unordered_map <std::string, KeySym> keySymMap;
+    std::unordered_map <std::string, unsigned int> modifierMap;
     bool modifierParsing = false;
     std::string modifierString = "";
     unsigned int modifiers = 0;
