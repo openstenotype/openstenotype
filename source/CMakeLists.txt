@@ -10,6 +10,7 @@ add_executable(${EXE_NAME}
   Config.cpp
   DictionaryLoader.cpp
   WindowSystem.cpp
+  Parser.cpp
   CommandInterpreter.cpp
   CommandParser.cpp
   WindowSystemDriver.cpp

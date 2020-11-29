@@ -7,15 +7,16 @@ namespace opensteno {
     keySymMap = keyMapFactory.getSymMap();
     modifierMap = keyMapFactory.getModifierMap();
   }
-  void CommandParser::processCommandString(std::string commandString) {
+
+  void CommandParser::processString(std::string commandString) {
     if(!commandInterpreter.executeCommand(commandString)){
       for(char character : commandString) {
-        processCommandChar(character);
+        processCharacter(character);
       }
     }
   }
 
-  void CommandParser::processCommandChar(char character){
+  void CommandParser::processCharacter(char character){
     std::unordered_map<std::string, KeySym>::iterator keySymMapIterator;
     std::unordered_map<std::string, unsigned int>::iterator modifierMapIterator;
     if (character == '{') {

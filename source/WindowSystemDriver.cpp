@@ -41,7 +41,7 @@ namespace opensteno {
         logger.log(logger::LogLevel::Info, std::string("System")) << "Exiting ";
         shutdown = true;
       } else {
-        commandParser.processCommandString(dictionaryIterator->second);
+        commandParser.processString(dictionaryIterator->second);
       }
     }
   }

@@ -22,6 +22,9 @@ find_package(logger REQUIRED)
 include_directories(${LOGGER_INCLUDE_DIR})
 list(APPEND OPENSTENO_LIBRARIES ${LOGGER_LIBRARIES})
 
+find_package(Catch REQUIRED)
+list(APPEND OPENSTENO_INCLUDE_DIRS ${CATCH_INCLUDE_DIR})
+
 find_package (Threads)
 list(APPEND OPENSTENO_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
 
@@ -36,6 +39,10 @@ if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 endif ()
 
 add_subdirectory(source)
+
+include_directories(${OPENSTENO_INCLUDE_DIRS} ${UnitTestPlusPlus_INCLUDE_DIRS})
+enable_testing()
+add_subdirectory(tests)
 
 if (CMAKE_VERSION VERSION_GREATER 2.8.5)
   include(FeatureSummary)

@@ -1,3 +1,6 @@
 [submodule "external/logger"]
 	path = external/logger
 	url = https://github.com/GlPortal/logger.git
+[submodule "external/catch"]
+	path = external/catch
+	url = https://github.com/catchorg/Catch2.git
