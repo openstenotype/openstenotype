@@ -4,9 +4,9 @@
 namespace opensteno {
   WindowSystemDriver::WindowSystemDriver(Config& config,
                                          logger::LoggerFactory& logger,
-                                         WindowSystem& windowSystem, CommandParser& commandParser):
+                                         WindowSystem& windowSystem, CommandParser& commandParser, CommandInterpreter& commandInterpreter):
     config(config), logger(logger), windowSystem(windowSystem), shutdown(false),
-    commandParser(commandParser)
+    commandParser(commandParser), commandInterpreter(commandInterpreter)
   {
     helper = WindowSystemDriverHelper();
     stenoboard.resetButtons();
@@ -41,7 +41,7 @@ namespace opensteno {
         logger.log(logger::LogLevel::Info, std::string("System")) << "Exiting ";
         shutdown = true;
       } else {
-        commandParser.processString(dictionaryIterator->second);
+        commandParser.processString(dictionaryIterator->second, commandInterpreter);
       }
     }
   }

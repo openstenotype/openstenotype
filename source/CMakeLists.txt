@@ -6,6 +6,7 @@ endif()
 
 add_executable(${EXE_NAME}
   Main.cpp
+  InterpreterStub.cpp
   JsonLoader.cpp
   Config.cpp
   DictionaryLoader.cpp

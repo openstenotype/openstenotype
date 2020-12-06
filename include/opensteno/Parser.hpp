@@ -2,16 +2,18 @@
 #define OPENSTENO_PARSER_HPP
 #include <string>
 #include <vector>
+#include <opensteno/CommandInterpreter.hpp>
 
 namespace opensteno {
   class Parser {
   private:
-    bool terminated;
-    bool running;
     std::string command;
     std::vector<std::string> parameters;
+  protected:
+    bool terminated;
+    bool running;
   public:
-    virtual void processCharacter(char commandCharacter) = 0;
+    virtual void processCharacter(char commandCharacter, CommandInterpreter& commandInterpreter) = 0;
     bool isStarted();
     bool isComplete();
     bool hasParameters();

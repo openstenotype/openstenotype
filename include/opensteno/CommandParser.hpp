@@ -10,12 +10,11 @@
 namespace opensteno {
   class CommandParser : public Parser {
   public:
-    CommandParser(logger::LoggerFactory& logger, CommandInterpreter& commandInterpreter);
-    void processString(std::string commandString);
-    virtual void processCharacter(char commandChar);
+    CommandParser(logger::LoggerFactory& logger);
+    void processString(std::string commandString, CommandInterpreter& commandInterpreter);
+    virtual void processCharacter(char commandChar, CommandInterpreter& commandInterpreter);
   private:
     logger::LoggerFactory& logger;
-    CommandInterpreter& commandInterpreter;
     std::unordered_map <std::string, KeySym> keySymMap;
     std::unordered_map <std::string, unsigned int> modifierMap;
     bool modifierParsing = false;

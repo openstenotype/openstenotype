@@ -1,12 +1,13 @@
 #ifndef OPENSTENO_COMMAND_INTERPRETER_HPP
 #define OPENSTENO_COMMAND_INTERPRETER_HPP
+#include <opensteno/Interpreter.hpp>
 #include <opensteno/WindowSystem.hpp>
 #include <opensteno/Config.hpp>
 #include <logger/include/LoggerFactory.hpp>
 #include <vector>
 
 namespace opensteno {
-  class CommandInterpreter {
+  class CommandInterpreter: public Interpreter {
   private:
     logger::LoggerFactory& logger;
     WindowSystem& windowSystem;

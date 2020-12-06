@@ -1,26 +1,26 @@
 #include <opensteno/CommandParser.hpp>
 
 namespace opensteno {
-  CommandParser::CommandParser(logger::LoggerFactory& logger,
-                               CommandInterpreter& commandInterpreter):
-    logger(logger), commandInterpreter(commandInterpreter) {
+  CommandParser::CommandParser(logger::LoggerFactory& logger):
+    logger(logger) {
     keySymMap = keyMapFactory.getSymMap();
     modifierMap = keyMapFactory.getModifierMap();
   }
 
-  void CommandParser::processString(std::string commandString) {
+  void CommandParser::processString(std::string commandString, CommandInterpreter& commandInterpreter) {
     if(!commandInterpreter.executeCommand(commandString)){
       for(char character : commandString) {
-        processCharacter(character);
+        processCharacter(character, commandInterpreter);
       }
     }
   }
 
-  void CommandParser::processCharacter(char character){
+  void CommandParser::processCharacter(char character, CommandInterpreter& commandInterpreter){
     std::unordered_map<std::string, KeySym>::iterator keySymMapIterator;
     std::unordered_map<std::string, unsigned int>::iterator modifierMapIterator;
     if (character == '{') {
       modifierParsing = true;
+      running = true;
     }
     if (character == '}') {
       modifierMapIterator = modifierMap.find(modifierString);
@@ -28,6 +28,8 @@ namespace opensteno {
         modifiers = modifierMapIterator->second;
       }
       modifierParsing = false;
+      running = false;
+      terminated = true;
       modifierString = "";
     }
     if (modifierParsing) {

@@ -9,6 +9,10 @@ namespace opensteno {
   void CommandInterpreter::executeCommand(std::string commandName, std::vector <std::string> parameters) {
   }
 
+  bool CommandInterpreter::hasCommand(std::string commandName) {
+    return false;
+  }
+
   bool CommandInterpreter::executeCommand(std::string commandName) {
     if (commandName == "<desktop-1>") {
       windowSystem.switchToDesktop(1);
